@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/15 15:26:10 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/15 15:51:09 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void		pipe_process(t_exec_attr *ea, int pipe_count);
 void		free_pipe_attr(t_pipe_attr *pa);
 
 // cmd_utils.c
-char		*get_filename(t_cmd *c, int io);
 bool		is_dir(char *cmd_path);
 bool		*malloc_has_not_permission(size_t size);
 bool		is_path(char *cmd);
