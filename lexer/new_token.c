@@ -6,7 +6,7 @@
 /*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 15:14:51 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:16:33 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ t_token	*new_token(t_tokentype type, char *literal)
 	if (token == NULL)
 		exit(EXIT_FAILURE);
 	token->type = type;
-	token->literal = ft_strdup(literal);
+	token->literal = ft_xstrdup(literal);
 	return (token);
 }

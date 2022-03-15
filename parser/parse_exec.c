@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akito     <akito@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 14:45:50 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:19:58 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_list	*filter_null_literal_cmd(t_list *lst)
 	skip_to_null(&lst, &literal);
 	if (lst == NULL)
 		return (NULL);
-	now = ft_lstnew(ft_strdup(lst->content));
+	now = ft_lstnew(ft_xstrdup(lst->content));
 	if (now == NULL)
 		return (NULL);
 	return (copy_except_null(lst, now, literal));
@@ -100,7 +100,7 @@ void	parse_exec(t_list *token_list, t_cmd **cmd_p)
 	cmd->args = tmp;
 	if (cmd->args != NULL)
 	{
-		cmd->cmd = ft_strdup(cmd->args->content);
+		cmd->cmd = ft_xstrdup(cmd->args->content);
 		if (cmd->cmd == NULL)
 			exit(EXIT_FAILURE);
 	}

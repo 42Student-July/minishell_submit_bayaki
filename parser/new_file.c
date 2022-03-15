@@ -6,7 +6,7 @@
 /*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 15:13:32 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:17:21 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,7 @@ t_file	*new_file(char *filename, bool is_double)
 
 	file = (t_file *)ft_xcalloc(sizeof(t_file), 1);
 	if (filename != NULL)
-	{
-		file->filename = ft_strdup(filename);
-		if (file->filename == NULL)
-			exit(EXIT_FAILURE);
-	}
+		file->filename = ft_xstrdup(filename);
 	else
 		file->filename = NULL;
 	file->is_double = is_double;

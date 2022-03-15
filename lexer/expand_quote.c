@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_quote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akito     <akito@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 14:45:50 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:17:01 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,7 @@ char	*expand_quote_str(const char *input)
 	char	*str;
 	size_t	i;
 
-	str = ft_strdup(input);
-	if (str == NULL)
-		exit(EXIT_FAILURE);
+	str = ft_xstrdup(input);
 	i = 0;
 	while (str[i] != '\0')
 	{

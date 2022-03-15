@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_envvar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akito     <akito@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 14:45:50 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:16:17 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*replace_string(char *str, const char *from, const char *to)
 	char	*replaced_str;
 	char	*tmp;
 
-	replaced_str = ft_strdup(to);
+	replaced_str = ft_xstrdup(to);
 	tmp = ft_strjoin(replaced_str, &str[ft_strlen(from)]);
 	free(replaced_str);
 	replaced_str = tmp;
@@ -84,9 +84,7 @@ char	*expand_envvar_str(const char *input, void *env)
 
 	in_sq = false;
 	in_dq = false;
-	str = ft_strdup(input);
-	if (str == NULL)
-		exit(EXIT_FAILURE);
+	str = ft_xstrdup(input);
 	i = 0;
 	while (str[i] != '\0')
 	{
