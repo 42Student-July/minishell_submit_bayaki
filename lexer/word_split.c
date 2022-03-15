@@ -6,7 +6,7 @@
 /*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 15:02:55 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:24:53 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*new_literal(const char *str, size_t *pos)
 		j++;
 	}
 	*pos = i + j;
-	return (ft_substr(str, i, j));
+	return (ft_xsubstr(str, i, j));
 }
 
 void	split_token(t_list **lst, t_token **token)
@@ -49,7 +49,7 @@ void	split_token(t_list **lst, t_token **token)
 	size_t	pos;
 
 	str = new_literal((*token)->literal, &pos);
-	str_next = ft_substr((*token)->literal, pos, ft_strlen((*token)->literal));
+	str_next = ft_xsubstr((*token)->literal, pos, ft_strlen((*token)->literal));
 	free((*token)->literal);
 	(*token)->literal = str;
 	if (*str_next == '\0')

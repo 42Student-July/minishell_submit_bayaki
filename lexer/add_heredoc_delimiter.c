@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_heredoc_delimiter.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akito     <akito@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 14:45:50 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:24:00 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ void	add_heredoc_delimiter(t_lexer *lexer)
 		}
 		pos_tail++;
 	}
-	delimiter = ft_substr(lexer->input, pos, pos_tail - pos);
+	delimiter = ft_xsubstr(lexer->input, pos, pos_tail - pos);
 	ft_lstadd_back(&lexer->io_here_delimiters, ft_lstnew(delimiter));
 }

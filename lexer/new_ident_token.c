@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_ident_token.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akito     <akito@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 14:45:50 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:24:39 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_token	*new_ident_token(t_lexer *lexer)
 			process_in_quote(lexer);
 		read_char(lexer);
 	}
-	ident = ft_substr(lexer->input, pos, lexer->position - pos);
+	ident = ft_xsubstr(lexer->input, pos, lexer->position - pos);
 	token = new_token(TOKEN_IDENT, ident);
 	free(ident);
 	ident = NULL;

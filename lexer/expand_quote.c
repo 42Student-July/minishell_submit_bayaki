@@ -6,7 +6,7 @@
 /*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 15:17:01 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:24:30 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,9 @@ void	expand_single_quote(char **str_p, size_t *i, const char quote)
 		j++;
 	if (str[j] == '\0')
 		exit(EXIT_FAILURE);
-	tmp_front = ft_substr(str, 0, *i);
-	if (tmp_front == NULL)
-		exit(EXIT_FAILURE);
-	tmp_middle = ft_substr(str, *i + 1, j - *i - 1);
-	if (tmp_middle == NULL)
-		exit(EXIT_FAILURE);
-	tmp_back = ft_substr(str, j + 1, ft_strlen(str) - j);
-	if (tmp_back == NULL)
-		exit(EXIT_FAILURE);
+	tmp_front = ft_xsubstr(str, 0, *i);
+	tmp_middle = ft_xsubstr(str, *i + 1, j - *i - 1);
+	tmp_back = ft_xsubstr(str, j + 1, ft_strlen(str) - j);
 	free(*str_p);
 	*str_p = join_string(join_string(tmp_front, tmp_middle), tmp_back);
 	*i = j - 1;
