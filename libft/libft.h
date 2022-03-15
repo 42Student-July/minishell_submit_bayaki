@@ -100,5 +100,6 @@ char	*ft_xstrjoin(char const *s1, char const *s2);
 void	*ft_xcalloc(size_t nmemb, size_t size);
 char	*ft_xsubstr(char const *s, unsigned int start, size_t len);
 char	**ft_xsplit(char const *str, char c);
+t_list *ft_xlstnew(void *content);
 
 #endif
