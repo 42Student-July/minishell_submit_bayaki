@@ -1,45 +1,20 @@
-
 #include "self_cmd.h"
-
-bool	is_sharp(char *arg)
-{
-	if (arg == NULL)
-		return (false);
-	// exportの第一引数が#から始まっている限り、なにが後ろにきたとしても、export(引数なし)と同じような実装になる。
-	if (*arg == '#')
-		return (true);
-	return (false);
-}
 
 int	exec_self_export(t_cmd *cmd, t_exec_attr *ea)
 {
-	char	*argv_one;
-	bool	exit_stat;
+	const char	*argv_one = get_argv_one(cmd);
+	bool		exit_stat;
+	const bool	is_sharp = (argv_one != NULL && argv_one[0] == '#');
 
 	exit_stat = true;
-	argv_one = get_argv_one(cmd);
-	if (argv_one == NULL || is_sharp(argv_one))
+	// exportの第一引数が#から始まっている限り、なにが後ろにきたとしても、export(引数なし)と同じような実装になる。
+	if (argv_one == NULL || is_sharp)
 		print_all_export_lst(ea);
 	else
 		export_with_args(cmd, ea, &exit_stat);
 	if (exit_stat)
 		return (0);
 	return (1);
-}
-
-// 新しく追加
-bool	addlst_sort_by_ascii(t_list **export_lst, char **arg)
-{
-	// まずadd_backでポインタの位置を確定した後、contentを入れ替える
-	bool	flag;
-
-	flag = ft_lstadd_back(export_lst, \
-			ft_lstnew(ft_kvsnew(arg[KEY], \
-				create_export_value(arg[VALUE]))));
-	if (!flag)
-		return (false);
-	sort_listkey_by_ascii(*export_lst);
-	return (true);
 }
 
 int	check_export_arg(char **arg)
@@ -52,68 +27,67 @@ int	check_export_arg(char **arg)
 	return (10);
 }
 
+void	export_with_assign(t_exec_attr *ea, bool *exit_stat, char *arg)
+{
+	char	**kv;
+	int		ret;
+
+	kv = ft_separate(arg, '=');
+	if (kv == NULL)
+		abort_minishell(MALLOC_ERROR, ea);
+	ret = check_export_arg(kv);
+	if (ret == INVALID_IDENTIFER)
+	{
+		*exit_stat = false;
+		print_error_msg_with_var(EXPORT, kv[KEY]);
+	}
+	else
+	{
+		// valueがnullだけど=が存在する場合、valueには\0を入れる。
+		if (ret == NO_VALUE)
+			kv[VALUE] = ft_xstrdup("");
+		if (!store_arg_in_env(ea, kv[KEY], kv[VALUE]))
+			abort_minishell_with(MALLOC_ERROR, ea, kv);
+		if (!store_arg_in_export(ea, kv[KEY], kv[VALUE]))
+			abort_minishell_with(MALLOC_ERROR, ea, kv);
+	}
+	free(kv[0]);
+	free(kv[1]);
+	free(kv);
+}
+
+void	export_with_args_single(t_exec_attr *ea, char *arg, bool *exit_stat)
+{
+	const bool	exists_equal = ft_strchr(arg, '=') != NULL;
+	const bool	is_started_with_equal = ft_strchr(arg, '=') == arg;
+
+	// ft_splitでは引数が"a="の場合と"a"の判別がつけられない実装になっている
+	// そのため、strchrでまず引数に=があるか判定してから、各実装に入る
+	// 先頭ポインタが"="だったとき、keyが存在しないのでerrorとする
+	if ((!exists_equal && is_invalid_name(arg)) || is_started_with_equal)
+	{
+		print_error_msg_with_var(EXPORT, arg);
+		*exit_stat = false;
+	}
+	else if (!exists_equal)
+	{
+		store_arg_in_export(ea, arg, NULL);
+		store_arg_in_env(ea, arg, NULL);
+	}
+	else
+		export_with_assign(ea, exit_stat, arg);
+}
+
 void	export_with_args(t_cmd *cmd, t_exec_attr *ea, bool *exit_stat)
 {
-	char		**kv;
-	int			ret;
-	char		*arg;
-	t_list		*lst;
+	t_list	*lst;
+	char	*arg;
 
 	lst = cmd->args->next;
 	while (lst != NULL)
 	{
 		arg = (char *)(lst->content);
-		// ft_splitでは引数が"a="の場合と"a"の判別がつけられない実装になっている
-		// そのため、strchrでまず引数に=があるか判定してから、各実装に入る
-		if (ft_strchr(arg, '=') == NULL)
-		{
-			if (is_invalid_name(arg))
-			{
-				print_error_msg_with_var(EXPORT, arg);
-				lst = lst->next;
-				*exit_stat = false;
-				continue ;
-			}
-			store_arg_in_export(ea, arg, NULL);
-			store_arg_in_env(ea, arg, NULL);
-		}
-		// 先頭ポインタが"="だったとき、keyが存在しないのでerrorとする
-		else if (ft_strchr(arg, '=') == arg)
-		{
-			*exit_stat = false;
-			print_error_msg_with_var(EXPORT, arg);
-			lst = lst->next;
-			continue ;
-		}
-		else
-		{
-			kv = ft_separate(arg, '=');
-			if (kv == NULL)
-				abort_minishell(MALLOC_ERROR, ea);
-			ret = check_export_arg(kv);
-			if (ret == INVALID_IDENTIFER)
-			{
-				*exit_stat = false;
-				print_error_msg_with_var(EXPORT, kv[KEY]);
-			}
-			else
-			{
-				if (ret == NO_VALUE)
-				{
-					// valueがnullだけど=が存在する場合、valueには\0を入れる。
-					kv[VALUE] = ft_strdup("");
-					if (kv[VALUE] == NULL)
-						abort_minishell_with(MALLOC_ERROR, ea, kv);
-				}
-				if (!store_arg_in_env(ea, kv[KEY], kv[VALUE]))
-					abort_minishell_with(MALLOC_ERROR, ea, kv);
-				if (!store_arg_in_export(ea, kv[KEY], kv[VALUE]))
-					abort_minishell_with(MALLOC_ERROR, ea, kv);
-			}
-			free(kv[0]);
-			free(kv[1]);
-			free(kv);
-		}
+		export_with_args_single(ea, arg, exit_stat);
 		lst = lst->next;
 	}
 }
