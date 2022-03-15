@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 08:12:38 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 08:34:52 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*create_export_value(char *value)
 	else
 		value_len = ft_strlen(value);
 	new_value_len = (value_len + DQUOTE + NULL_CHAR);
-	new_value = (char *)ft_calloc(sizeof(char), new_value_len);
+	new_value = (char *)ft_xcalloc(sizeof(char), new_value_len);
 	if (new_value == NULL)
 		return (NULL);
 	ft_strlcat(new_value, "\"", new_value_len);
@@ -39,6 +39,7 @@ void	store_allenv_in_export(t_exec_attr *ea, char **environ)
 	char		**split;
 	t_list		*export_lst;
 	char		*value;
+
 	export_lst = NULL;
 	i = 0;
 	while (environ[i] != NULL)
@@ -66,14 +67,9 @@ bool	store_arg_in_export(t_exec_attr *ea, char *key, char *value)
 	t_list	*target;
 
 	if (value != NULL)
-	{
 		export_value = create_export_value(value);
-		if (export_value == NULL)
-			abort_minishell(MALLOC_ERROR, ea);
-	}
 	else
 		export_value = NULL;
-	// もし値が存在するなら更新する
 	target = get_lst_by_key(ea->export_lst, key);
 	if (target != NULL)
 	{

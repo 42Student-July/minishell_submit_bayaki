@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 08:12:46 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 08:36:52 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ bool	swap_lst_content(t_list *a, t_list *b)
 
 void	sort_listkey_by_ascii(t_list *lst)
 {
-	// 大文字アルファベット → _ → 小文字のアルファベットに並び替える
 	t_list	*min;
 
 	if (lst == NULL)
@@ -68,7 +67,6 @@ t_list	*get_list_by_min_ascii_key(t_list *lst)
 	{
 		min_key = ft_kvsget_key(tmp->content);
 		next_key = ft_kvsget_key(lst->next->content);
-		// lvalueの方が大きいので、tmpをrvalueにchange
 		if (is_lvalue_bigger_ascii(min_key, next_key))
 			tmp = lst->next;
 		lst = lst->next;
@@ -76,7 +74,7 @@ t_list	*get_list_by_min_ascii_key(t_list *lst)
 	return (tmp);
 }
 
-void		del_env_lst_by_key(t_list *lst, char *key, t_exec_attr *ea)
+void	del_env_lst_by_key(t_list *lst, char *key, t_exec_attr *ea)
 {
 	t_list	*target;
 
@@ -87,23 +85,6 @@ void		del_env_lst_by_key(t_list *lst, char *key, t_exec_attr *ea)
 	if (lst == target)
 	{
 		ea->env_lst = target->next;
-		free(target);
-		return ;
-	}
-	ft_lstdel(lst, target);
-}
-
-void		del_export_lst_by_key(t_list *lst, char *key, t_exec_attr *ea)
-{
-	t_list	*target;
-
-	target = get_lst_by_key(lst, key);
-	if (target == NULL)
-		return ;
-	ft_kvsdelete(target->content);
-	if (lst == target)
-	{
-		ea->export_lst = target->next;
 		free(target);
 		return ;
 	}
