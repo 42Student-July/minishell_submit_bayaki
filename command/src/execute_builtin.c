@@ -6,25 +6,11 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/15 15:28:21 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/15 17:13:41 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/command.h"
-
-bool	is_not_exec_path(const char *command)
-{
-	size_t	i;
-
-	i = 0;
-	while (command[i] != '\0')
-	{
-		if (command[i] == '/')
-			return (false);
-		i++;
-	}
-	return (true);
-}
 
 char	*create_env_line_non_value(char *key, bool is_end)
 {

@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/15 16:32:49 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/15 17:13:19 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void		exec_in_child_process(t_exec_attr *ea);
 bool		exec_in_main_process(t_exec_attr *ea);
 
 // execute_builtin.c
-bool		is_not_exec_path(const char *command);
 char		**convert_envlst_to_array(t_exec_attr *ea);
 char		*create_environ_line(char *key, char *value, bool is_end);
 
