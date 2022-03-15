@@ -43,7 +43,7 @@ void	store_allenv_in_export(t_exec_attr *ea, char **environ)
 	i = 0;
 	while (environ[i] != NULL)
 	{
-		split = ft_split(environ[i], '=');
+		split = ft_separate(environ[i], '=');
 		if (split == NULL)
 			abort_minishell(MALLOC_ERROR, ea);
 		value = create_export_value(split[VALUE]);

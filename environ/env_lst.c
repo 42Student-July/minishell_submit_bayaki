@@ -23,9 +23,7 @@ void	store_allenv_in_envlst(t_exec_attr *ea, char **environ)
 	env_lst = NULL;
 	while (environ[i] != NULL)
 	{
-		split = ft_split(environ[i], '=');
-		if (split == NULL)
-			abort_minishell(MALLOC_ERROR, ea);
+		split = ft_separate(environ[i], '=');
 		if (split[VALUE] == NULL)
 		{
 			// valueがnullのときはsplit[VALUE]に値を入れるとreallocが必要なのでtmpを用意
