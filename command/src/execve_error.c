@@ -6,11 +6,17 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/15 20:28:48 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/15 23:09:57 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command.h"
+
+void	exit_with_err_msg(char *cmd, char *msg, int exit_status)
+{
+	ft_put_cmd_error(cmd, msg);
+	exit(exit_status);
+}
 
 static bool	can_exit(char *cmd_path)
 {
