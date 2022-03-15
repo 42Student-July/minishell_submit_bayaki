@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/15 15:51:09 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/15 16:32:49 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,11 @@ bool		is_path(char *cmd);
 char		*create_cmd_path(t_cmd *c, t_exec_attr *ea);
 // execve_error.c
 void		execve_error(int cp_errno, char *cmd_path);
+
+// create_cmd_utils.c
+char		*create_cmd(char *path, char *command, DIR *dirp);
+char		*concat_path_and_cmd(char *path, char *command);
+bool		is_invalid_permission(\
+	char *path, char *command, size_t cmd_i, t_exec_attr *ea);
 
 #endif

@@ -6,83 +6,37 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/15 15:42:40 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/15 16:31:36 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../includes/command.h"
 
-char	*concat_path_and_cmd(char *path, char *command)
-{
-	char			*new_cmd;
-	size_t			new_cmd_len;
-
-	new_cmd_len = ft_strlen(path) + SLASH + ft_strlen(command) + NULL_CHAR;
-	new_cmd = (char *)ft_xcalloc(sizeof(char), (new_cmd_len));
-	ft_strlcat(new_cmd, path, new_cmd_len);
-	ft_strlcat(new_cmd, "/", new_cmd_len);
-	ft_strlcat(new_cmd, command, new_cmd_len);
-	return (new_cmd);
-}
-
-bool	can_exec(char *cmd_path)
-{
-	struct stat	stat_buf;
-
-	if (stat(cmd_path, &stat_buf) == -1)
-		exit(EXIT_FAILURE);
-	// 所有者の実行許可を確認している
-	if ((stat_buf.st_mode & S_IXUSR) != S_IXUSR)
-		return (false);
-	// 所有者の読み込み許可を確認している
-	if ((stat_buf.st_mode & S_IRUSR) != S_IRUSR)
-		return (false);
-	return (true);
-}
-
-char	*create_cmd_from_path(char *cmd, char **path, t_exec_attr *ea, size_t cmd_i)
+char	*create_cmd_from_path(\
+	char *cmd, char **path, t_exec_attr *ea, size_t cmd_i)
 {
 	DIR				*dirp;
 	struct dirent	*dp;
-	size_t			i;
-	char			*new_cmd;
-	bool			is_break;
 
-	i = 0;
-	ea->has_not_permission[cmd_i] = false; // 初期化であって、権限があるわけではない
-	while (path[i] != NULL)
+	while (*path != NULL)
 	{
-		is_break = false;
-		dirp = opendir(path[i]);
-		if (dirp == NULL)
+		dirp = opendir(*path);
+		if (dirp != NULL)
 		{
-			i++;
-			continue ;
-		}
-		dp = readdir(dirp);
-		while (dp != NULL)
-		{
-			if (is_same_str(dp->d_name, cmd))
-			{
-				closedir(dirp);
-				new_cmd = concat_path_and_cmd(path[i], cmd);
-				if (!can_exec(new_cmd))
-				{
-					// 権限がなくてもエラーにはせず、PATHから他の実行ファイルが見つかるまでループを回す
-					ea->has_not_permission[cmd_i] = true;
-					is_break = true;
-					free(new_cmd);
-					break ;
-				}
-				return (new_cmd);
-			}
 			dp = readdir(dirp);
-		}
-		i++;
-		// breakで来た場合ここを通させない
-		if (!is_break)
+			while (dp != NULL)
+			{
+				if (is_same_str(dp->d_name, cmd))
+				{
+					if (is_invalid_permission(*path, cmd, cmd_i, ea))
+						break ;
+					return (create_cmd(*path, cmd, dirp));
+				}
+				dp = readdir(dirp);
+			}
 			closedir(dirp);
+		}
+		path++;
 	}
 	return (NULL);
 }
