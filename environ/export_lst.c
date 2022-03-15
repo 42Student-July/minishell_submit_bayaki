@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 08:34:52 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 08:54:30 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ bool	store_arg_in_export(t_exec_attr *ea, char *key, char *value)
 	target = get_lst_by_key(ea->export_lst, key);
 	if (target != NULL)
 	{
-		if (!update_value(ea->export_lst, key, export_value, ea))
+		if (!update_value(ea->export_lst, key, export_value))
 			return (false);
 	}
 	else

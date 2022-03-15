@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 08:37:21 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 08:54:09 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_list		*get_lst_by_key(t_list *lst, char *key);
 void		sort_listkey_by_ascii(t_list *lst);
 
 // lst_utils_2.c
-bool		update_value(t_list *lst, char *key, char *new_v, t_exec_attr *ea);
+bool		update_value(t_list *lst, char *key, char *new_v);
 void		del_export_lst_by_key(t_list *lst, char *key, t_exec_attr *ea);
 
 #endif

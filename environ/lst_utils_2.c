@@ -6,13 +6,13 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 08:37:03 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 08:53:59 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environ.h"
 
-bool	update_value(t_list *lst, char *key, char *new_v, t_exec_attr *ea)
+bool	update_value(t_list *lst, char *key, char *new_v)
 {
 	t_list	*target;
 	char	*tmp;

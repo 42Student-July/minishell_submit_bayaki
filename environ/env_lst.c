@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 08:31:39 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 08:54:25 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ bool	store_arg_in_env(t_exec_attr *ea, char *key, char *value)
 	target = get_lst_by_key(ea->env_lst, key);
 	if (target != NULL)
 	{
-		if (!update_value(ea->env_lst, key, value, ea))
+		if (!update_value(ea->env_lst, key, value))
 			return (false);
 	}
 	else
