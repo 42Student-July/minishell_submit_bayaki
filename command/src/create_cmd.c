@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/15 15:40:08 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/15 15:41:05 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ char	*concat_path_and_cmd(char *path, char *command)
 	size_t			new_cmd_len;
 
 	new_cmd_len = ft_strlen(path) + SLASH + ft_strlen(command) + NULL_CHAR;
-	new_cmd = (char *)ft_calloc(sizeof(char), (new_cmd_len));
-	if (new_cmd == NULL)
-		return (NULL);
+	new_cmd = (char *)ft_xcalloc(sizeof(char), (new_cmd_len));
 	ft_strlcat(new_cmd, path, new_cmd_len);
 	ft_strlcat(new_cmd, "/", new_cmd_len);
 	ft_strlcat(new_cmd, command, new_cmd_len);
@@ -69,8 +67,6 @@ char	*create_cmd_from_path(char *cmd, char **path, t_exec_attr *ea, size_t cmd_i
 			{
 				closedir(dirp);
 				new_cmd = concat_path_and_cmd(path[i], cmd);
-				if (new_cmd == NULL)
-					abort_minishell_with(MALLOC_ERROR, ea, path);
 				if (!can_exec(new_cmd))
 				{
 					// 権限がなくてもエラーにはせず、PATHから他の実行ファイルが見つかるまでループを回す
@@ -99,20 +95,14 @@ char	*replace_colon_to_currentdir(char *env_path)
 
 	if (env_path[0] == ':')
 	{
-		ret = ft_strjoin(".", env_path);
-		if (ret == NULL)
-			exit(EXIT_FAILURE);
+		ret = ft_xstrjoin(".", env_path);
 		free(env_path);
 		return (ret);
 	}
 	ret = ft_replace_str(env_path, "::", ":.:");
-	if (ret == NULL)
-		exit(EXIT_FAILURE);
 	if (env_path[ft_strlen(env_path) - 1] == ':')
 	{
-		tmp = ft_strjoin(ret, ".");
-		if (tmp == NULL)
-			exit(EXIT_FAILURE);
+		tmp = ft_xstrjoin(ret, ".");
 		free(ret);
 		ret = tmp;
 	}
@@ -134,9 +124,7 @@ char	*find_path(char *cmd_name, t_exec_attr *ea, size_t cmd_i)
 	if (env_path == NULL)
 		return (NULL);
 	env_path = replace_colon_to_currentdir(env_path);
-	path = ft_split(env_path, ':');
-	if (path == NULL)
-		abort_minishell_with(MALLOC_ERROR, ea, path);
+	path = ft_xsplit(env_path, ':');
 	new_cmd = create_cmd_from_path(cmd_name, path, ea, cmd_i);
 	if (new_cmd == NULL)
 	{
