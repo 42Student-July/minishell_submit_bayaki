@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akito     <akito@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 14:45:50 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:16:55 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ bool	read_heredoc(t_lexer *lexer, t_list *env_list)
 	bool	has_quote;
 
 	heredoc_delimiter = ft_my_lstpop_front(&lexer->io_here_delimiters);
-	delimiter = ft_strdup(heredoc_delimiter->content);
+	delimiter = ft_xstrdup(heredoc_delimiter->content);
 	ft_lstdelone(heredoc_delimiter, free);
 	has_quote = ft_strchr(delimiter, '\'') != NULL || ft_strchr(delimiter,
 			'"') != NULL;

@@ -6,7 +6,7 @@
 /*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 14:51:08 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:24:12 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,5 @@ char	*get_word(char *str)
 		exit(EXIT_FAILURE);
 	while (is_word_char(str[i]))
 		i++;
-	return (ft_substr(str, 0, i));
+	return (ft_xsubstr(str, 0, i));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_lexer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akito     <akito@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 14:45:50 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:16:42 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,8 @@ t_lexer	*new_lexer(const char *input)
 {
 	t_lexer	*lexer;
 
-	lexer = (t_lexer *)malloc(sizeof(t_lexer));
-	if (lexer == NULL)
-		exit(EXIT_FAILURE);
-	lexer->input = ft_strdup(input);
-	if (lexer->input == NULL)
-		exit(EXIT_FAILURE);
+	lexer = (t_lexer *)ft_xmalloc(sizeof(t_lexer));
+	lexer->input = ft_xstrdup(input);
 	lexer->position = 0;
 	lexer->read_position = 0;
 	lexer->ch = '\0';

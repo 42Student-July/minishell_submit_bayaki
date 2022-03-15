@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   word_split_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akito     <akito@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 14:45:50 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:26:24 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_lstadd_next(t_list *lst, void *content)
 {
 	t_list	*new;
 
-	new = ft_lstnew(content);
+	new = ft_xlstnew(content);
 	new->next = lst->next;
 	lst->next = new;
 }

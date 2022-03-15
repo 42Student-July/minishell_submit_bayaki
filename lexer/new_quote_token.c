@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_quote_token.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akito     <akito@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 14:45:50 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:24:47 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_token	*new_quote_token(t_lexer *lexer, t_tokentype type)
 				exit(EXIT_FAILURE);
 		read_char(lexer);
 	}
-	quote = ft_substr(lexer->input, pos + 1, lexer->position - pos - 1);
+	quote = ft_xsubstr(lexer->input, pos + 1, lexer->position - pos - 1);
 	token = new_token(type, quote);
 	free(quote);
 	quote = NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akito     <akito@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 14:45:50 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:26:43 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void
 	addback_newfile(t_token **token, t_list *lst, t_list **file, bool append)
 {
 	*token = lst->next->content;
-	ft_lstadd_back(file, ft_lstnew(new_file((*token)->literal, append)));
+	ft_lstadd_back(file, ft_xlstnew(new_file((*token)->literal, append)));
 }
 
 void	addback_heredocfile(t_list **heredocs, t_token **token,
@@ -35,7 +35,7 @@ void	addback_heredocfile(t_list **heredocs, t_token **token,
 
 	(*token) = lst->next->content;
 	filename = ft_kvsget(*heredocs, (*token)->literal);
-	ft_lstadd_back(&cmd->filenames_in, ft_lstnew(new_file(filename, true)));
+	ft_lstadd_back(&cmd->filenames_in, ft_xlstnew(new_file(filename, true)));
 }
 
 t_cmd	*parse_cmd(t_list *token_list, t_list **heredocs)

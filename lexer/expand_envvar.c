@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_envvar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akito     <akito@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 14:45:50 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:24:17 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ char	*expand_single_envvar(char *str, const char *from, const char *to,
 	char	*tmp_front;
 	char	*tmp_back;
 
-	tmp_front = ft_substr(str, 0, *i);
+	tmp_front = ft_xsubstr(str, 0, *i);
 	tmp_back = replace_string(&str[*i + 1], from, to);
 	*i = ft_strlen(tmp_front);
 	if (to != NULL)
 		*i += ft_strlen(to);
-	replaced_str = ft_strjoin(tmp_front, tmp_back);
+	replaced_str = ft_xstrjoin(tmp_front, tmp_back);
 	free(tmp_front);
 	free(tmp_back);
 	return (replaced_str);
@@ -46,8 +46,8 @@ char	*replace_string(char *str, const char *from, const char *to)
 	char	*replaced_str;
 	char	*tmp;
 
-	replaced_str = ft_strdup(to);
-	tmp = ft_strjoin(replaced_str, &str[ft_strlen(from)]);
+	replaced_str = ft_xstrdup(to);
+	tmp = ft_xstrjoin(replaced_str, &str[ft_strlen(from)]);
 	free(replaced_str);
 	replaced_str = tmp;
 	return (replaced_str);
@@ -84,9 +84,7 @@ char	*expand_envvar_str(const char *input, void *env)
 
 	in_sq = false;
 	in_dq = false;
-	str = ft_strdup(input);
-	if (str == NULL)
-		exit(EXIT_FAILURE);
+	str = ft_xstrdup(input);
 	i = 0;
 	while (str[i] != '\0')
 	{
