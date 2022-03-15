@@ -6,7 +6,7 @@
 /*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 14:51:33 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:02:55 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	split_process(t_list **lst, t_token **token, t_list *lst_prev)
 	{
 		if (has_only_whitespace((*token)->literal))
 		{
+			delete_str(&((*token)->literal));
 			*lst = (*lst)->next;
 			return ;
 		}
