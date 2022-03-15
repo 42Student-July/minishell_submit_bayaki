@@ -8,7 +8,7 @@ void	*ft_xmalloc(size_t size)
 	ret = malloc(size);
 	if (ret == NULL)
 	{
-		perror(ret);
+		perror("malloc");
 		exit(EXIT_FAILURE);
 	}
 	return (ret);
