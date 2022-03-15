@@ -6,7 +6,7 @@
 #    By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/02 13:21:26 by mhirabay          #+#    #+#              #
-#    Updated: 2022/03/15 20:32:29 by mhirabay         ###   ########.fr        #
+#    Updated: 2022/03/15 22:19:36 by mhirabay         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCNAME	:=	execute_builtin.c \
 			execve_error.c \
 			create_cmd_utils.c \
 			redirect_utils.c \
+			pipe_process_utils.c \
 
 SRCS	:= $(addprefix $(SRCDIR), $(SRCNAME))
 

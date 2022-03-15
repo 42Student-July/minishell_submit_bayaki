@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/15 21:40:53 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/15 23:10:40 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ bool		is_path(char *cmd);
 char		*create_cmd_path(t_cmd *c, t_exec_attr *ea);
 // execve_error.c
 void		execve_error(int cp_errno, char *cmd_path);
+void		exit_with_err_msg(char *cmd, char *msg, int exit_status);
 
 // create_cmd_utils.c
 char		*create_cmd(char *path, char *command, DIR *dirp);
@@ -107,5 +108,12 @@ void		redirect_dev_null(t_exec_attr *ea);
 bool		open_files_in(t_cmd *cmd);
 bool		open_files_out(t_cmd *cmd);
 void		change_fd(t_list *files, bool is_in);
+
+// pipe_process_utils.c
+void		malloc_pipe_fd(t_pipe_attr *pa);
+void		malloc_cpid_array(t_pipe_attr *pa);
+void		make_pipe(t_pipe_attr *pa);
+void		set_pipe_fd(t_pipe_attr *pa);
+void		close_pipe(t_pipe_attr *pa);
 
 #endif
