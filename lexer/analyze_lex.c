@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   analyze_lex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akito     <akito@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 14:45:50 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:12:31 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ static t_lexer_product	*new_lexer_product(void)
 {
 	t_lexer_product	*product;
 
-	product = ft_calloc(1, sizeof(t_lexer_product));
-	if (product == NULL)
-		exit(EXIT_FAILURE);
+	product = ft_xcalloc(1, sizeof(t_lexer_product));
 	return (product);
 }
 
