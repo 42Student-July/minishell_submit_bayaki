@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/15 23:09:48 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 06:49:34 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,6 @@ void	process_pipe(t_exec_attr *ea, t_pipe_attr *pa)
 	exit(0);
 }
 
-
-// TODO:構造体がexec単位でわけられているので、eaを渡したくない
 void	exec_cmd(t_exec_attr *ea, t_pipe_attr *pa)
 {
 	int		pid;
