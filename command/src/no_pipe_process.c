@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   no_pipe_process.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mhirabay  <mhirabay@student.42tokyo.j      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
+/*   Updated: 2022/03/15 15:07:54 by mhirabay         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include "command.h"
 
@@ -14,31 +26,6 @@ bool	is_path(char *cmd)
 	}
 	return (false);
 }
-
-// 多分不要になる
-// char	*find_execfile_in_currentdir(char *cmd, t_exec_attr *ea)
-// {
-// 	DIR				*dirp;
-// 	struct dirent	*dp;
-// 	char			*cmd_path;
-
-// 	dirp = opendir(ea->current_pwd);
-// 	if (dirp == NULL)
-// 		return (NULL);
-// 	dp = readdir(dirp);
-// 	while (dp != NULL)
-// 	{
-// 		if (is_same_str(dp->d_name, cmd))
-// 		{
-// 			cmd_path = concat_path_and_cmd(ea->current_pwd, cmd);
-// 			if (cmd_path == NULL)
-// 				exit(EXIT_FAILURE);
-// 			return (cmd_path);
-// 		}
-// 		dp = readdir(dirp);
-// 	}
-// 	return (NULL);
-// }
 
 void	execute_ext_cmd(t_cmd *c, t_exec_attr *ea)
 {
