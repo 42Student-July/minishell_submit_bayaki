@@ -6,7 +6,7 @@
 /*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 15:16:17 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:22:59 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*expand_single_envvar(char *str, const char *from, const char *to,
 	*i = ft_strlen(tmp_front);
 	if (to != NULL)
 		*i += ft_strlen(to);
-	replaced_str = ft_strjoin(tmp_front, tmp_back);
+	replaced_str = ft_xstrjoin(tmp_front, tmp_back);
 	free(tmp_front);
 	free(tmp_back);
 	return (replaced_str);
@@ -47,7 +47,7 @@ char	*replace_string(char *str, const char *from, const char *to)
 	char	*tmp;
 
 	replaced_str = ft_xstrdup(to);
-	tmp = ft_strjoin(replaced_str, &str[ft_strlen(from)]);
+	tmp = ft_xstrjoin(replaced_str, &str[ft_strlen(from)]);
 	free(replaced_str);
 	replaced_str = tmp;
 	return (replaced_str);

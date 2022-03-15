@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_tmpfile.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akito     <akito@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 14:45:50 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:22:48 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*get_tmpfile_name(char *suffix)
 {
 	char	*tmp;
 
-	tmp = ft_strjoin("/tmp/minishell-thd-", suffix);
+	tmp = ft_xstrjoin("/tmp/minishell-thd-", suffix);
 	free(suffix);
 	return (tmp);
 }
