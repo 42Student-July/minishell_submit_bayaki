@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/15 15:41:05 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/15 15:42:40 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,13 +126,9 @@ char	*find_path(char *cmd_name, t_exec_attr *ea, size_t cmd_i)
 	env_path = replace_colon_to_currentdir(env_path);
 	path = ft_xsplit(env_path, ':');
 	new_cmd = create_cmd_from_path(cmd_name, path, ea, cmd_i);
-	if (new_cmd == NULL)
-	{
-		free_char_dptr(path);
-		free(env_path);
-		return (NULL);
-	}
 	free_char_dptr(path);
 	free(env_path);
+	if (new_cmd == NULL)
+		return (NULL);
 	return (new_cmd);
 }
