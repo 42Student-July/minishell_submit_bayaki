@@ -115,17 +115,65 @@ void	wait_process(t_pipe_attr *pa)
 	}
 }
 
-// TODO:構造体がexec単位でわけられているので、eaを渡したくない
-void	exec_cmd(t_exec_attr *ea, t_pipe_attr *pa)
+char	*create_cmd_path_pipe(t_exec_attr *ea, t_pipe_attr *pa)
 {
-	int		pid;
+	char	*cmd_path;
+	char	*cmd;
+
+	cmd = pa->current_cmd->cmd;
+	if (is_path(cmd))
+		cmd_path = ft_xstrdup(cmd);
+	else
+	{
+		cmd_path = find_path(cmd, ea, pa->cmd_i);
+		if (cmd_path == NULL)
+		{
+			if (ea->has_not_permission[pa->cmd_i])
+				exit_with_err_msg(cmd, "Permission denied", 126);
+			else
+				exit_with_err_msg(cmd, "command not found", 127);
+		}
+		if (is_dir(cmd_path))
+			exit_with_err_msg(cmd, "is a directory", 126);
+	}
+	return (cmd_path);
+}
+
+void	process_pipe(t_exec_attr *ea, t_pipe_attr *pa)
+{
 	char	**cmdv;
 	char	*cmd_path;
 	char	**environ;
 
-	cmd_path = NULL;
 	cmdv = convert_lst_to_argv(pa->current_cmd->args);
 	environ = convert_envlst_to_array(ea);
+	if (has_redirect_file(pa->current_cmd))
+		open_files_in_pipe(pa->current_cmd, ea);
+	set_pipe_fd(pa);
+	if (!is_self_cmd(pa->current_cmd->cmd))
+		cmd_path = create_cmd_path_pipe(ea, pa);
+	if (has_redirect_file(pa->current_cmd))
+		redirect(pa->current_cmd, ea);
+	if (is_self_cmd(pa->current_cmd->cmd))
+		execute_self_cmd(pa->current_cmd, ea, PIPE);
+	else
+	{
+		if (execve(cmd_path, cmdv, environ) == -1)
+		{
+			execve_error(errno, pa->current_cmd->cmd);
+			exit(EXIT_FAILURE);
+		}
+	}
+	free(cmd_path);
+	exit(0);
+}
+
+
+// TODO:構造体がexec単位でわけられているので、eaを渡したくない
+void	exec_cmd(t_exec_attr *ea, t_pipe_attr *pa)
+{
+	int		pid;
+
 	pid = fork();
 	pa->cpid_array[pa->cmd_i] = pid;
 	if (pid == -1)
@@ -135,59 +183,7 @@ void	exec_cmd(t_exec_attr *ea, t_pipe_attr *pa)
 	}
 	else if (pid == 0)
 	{
-		if (has_redirect_file(pa->current_cmd))
-			open_files_in_pipe(pa->current_cmd, ea);
-		set_pipe_fd(pa);
-		if (!is_self_cmd(pa->current_cmd->cmd))
-		{
-			if (is_path(pa->current_cmd->cmd))
-			{
-				cmd_path = ft_strdup(pa->current_cmd->cmd);
-				if (cmd_path == NULL)
-				{
-					printf("ft_strdup error\n");
-					exit(EXIT_FAILURE);
-				}
-			}
-			else
-			{
-				cmd_path = find_path(pa->current_cmd->cmd, ea, pa->cmd_i);
-				if (cmd_path == NULL)
-				{
-					if (ea->has_not_permission[pa->cmd_i])
-					{
-						ft_put_cmd_error(pa->current_cmd->cmd, "Permission denied");
-						exit(126);
-					}
-					else
-					{
-						ft_put_cmd_error(pa->current_cmd->cmd, "command not found");
-						g_exit_status = 127;
-						exit(127);
-					}
-				}
-			}
-			// cmd_pathがディレクトリか確認する処理
-			if (is_dir(cmd_path))
-			{
-				ft_put_cmd_error(pa->current_cmd->cmd, "is a directory");
-				exit(126);
-			}
-		}
-		if (has_redirect_file(pa->current_cmd))
-			redirect(pa->current_cmd, ea);
-		if (is_self_cmd(pa->current_cmd->cmd))
-			execute_self_cmd(pa->current_cmd, ea, PIPE);
-		else
-		{
-			if (execve(cmd_path, cmdv, environ) == -1)
-			{
-				execve_error(errno, pa->current_cmd->cmd);
-				exit(EXIT_FAILURE);
-			}
-		}
-		free(cmd_path);
-		exit(0);
+		process_pipe(ea, pa);
 	}
 	else if (pa->cmd_i > 0)
 	{
