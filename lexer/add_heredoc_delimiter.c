@@ -6,7 +6,7 @@
 /*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 15:24:00 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:26:02 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,5 @@ void	add_heredoc_delimiter(t_lexer *lexer)
 		pos_tail++;
 	}
 	delimiter = ft_xsubstr(lexer->input, pos, pos_tail - pos);
-	ft_lstadd_back(&lexer->io_here_delimiters, ft_lstnew(delimiter));
+	ft_lstadd_back(&lexer->io_here_delimiters, ft_xlstnew(delimiter));
 }

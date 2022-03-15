@@ -6,7 +6,7 @@
 /*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 14:54:56 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:27:11 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static t_list	*invalid_cmd(void)
 
 	cmd = cmd_init();
 	cmd->is_invalid_syntax = true;
-	return (ft_lstnew(cmd));
+	return (ft_xlstnew(cmd));
 }
 
 static t_list	*parse_pipe_helper(t_list *token_list, t_list **heredocs)
@@ -57,10 +57,10 @@ static t_list	*parse_pipe_helper(t_list *token_list, t_list **heredocs)
 			lst = parse_pipe_helper(right_tokens, heredocs);
 			if (((t_token *)right_tokens->content)->type == TOKEN_EOF)
 				((t_cmd *)lst->content)->is_invalid_syntax = true;
-			ft_lstadd_front(&lst, ft_lstnew(parse_cmd(left_tokens, heredocs)));
+			ft_lstadd_front(&lst, ft_xlstnew(parse_cmd(left_tokens, heredocs)));
 			return (lst);
 		}
 		token_list = token_list->next;
 	}
-	return (ft_lstnew(parse_cmd(left_tokens, heredocs)));
+	return (ft_xlstnew(parse_cmd(left_tokens, heredocs)));
 }

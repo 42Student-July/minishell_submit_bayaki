@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   register_heredocs.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akito     <akito@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 14:45:50 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:26:20 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,5 @@ void	register_heredocs(t_lexer *lexer, char *delimiter)
 		exit(EXIT_FAILURE);
 	kvs = ft_kvsnew(delimiter, tmpfile);
 	free(tmpfile);
-	ft_lstadd_back(&lexer->heredocs, ft_lstnew(kvs));
+	ft_lstadd_back(&lexer->heredocs, ft_xlstnew(kvs));
 }

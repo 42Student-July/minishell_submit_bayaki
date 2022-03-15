@@ -6,7 +6,7 @@
 /*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 15:12:31 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:26:14 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	make_token_list(const char *line, t_token **token,
 	while (true)
 	{
 		*token = next_token(*lexer);
-		ft_lstadd_back(&(*lexer_product)->token_list, ft_lstnew(*token));
+		ft_lstadd_back(&(*lexer_product)->token_list, ft_xlstnew(*token));
 		if ((*token)->type == TOKEN_EOF)
 			break ;
 	}
