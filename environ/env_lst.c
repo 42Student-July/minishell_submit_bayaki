@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 08:12:32 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 08:54:25 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,16 @@ void	store_allenv_in_envlst(t_exec_attr *ea, char **environ)
 	env_lst = NULL;
 	while (environ[i] != NULL)
 	{
-		split = ft_split(environ[i], '=');
-		if (split == NULL)
-			abort_minishell(MALLOC_ERROR, ea);
+		split = ft_separate(environ[i], '=');
 		if (split[VALUE] == NULL)
 		{
-			// valueがnullのときはsplit[VALUE]に値を入れるとreallocが必要なのでtmpを用意
-			tmp = ft_strdup("");
-			if (!ft_lstadd_back(&env_lst, ft_lstnew(ft_kvsnew(split[KEY], tmp))))
-				abort_minishell_with(MALLOC_ERROR, ea, split);
+			tmp = ft_xstrdup("");
+			ft_lstadd_back(&env_lst, ft_lstnew(ft_kvsnew(split[KEY], tmp)));
 			free(tmp);
 		}
 		else
-		{
-			if (!ft_lstadd_back(&env_lst, \
-			ft_lstnew(ft_kvsnew(split[KEY], split[VALUE]))))
-				abort_minishell_with(MALLOC_ERROR, ea, split);
-
-		}
+			ft_lstadd_back(&env_lst, \
+				ft_lstnew(ft_kvsnew(split[KEY], split[VALUE])));
 		i++;
 		free_char_dptr(split);
 	}
@@ -54,7 +46,7 @@ bool	store_arg_in_env(t_exec_attr *ea, char *key, char *value)
 	target = get_lst_by_key(ea->env_lst, key);
 	if (target != NULL)
 	{
-		if (!update_value(ea->env_lst, key, value, ea))
+		if (!update_value(ea->env_lst, key, value))
 			return (false);
 	}
 	else

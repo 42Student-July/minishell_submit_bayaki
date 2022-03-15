@@ -27,12 +27,12 @@ void	update_all_environ(char *new_pwd, t_exec_attr *ea)
 	if (pwdlst != NULL)
 	{
 		export_new_pwd = create_export_value(new_pwd);
-		update_value(ea->env_lst, "PWD", new_pwd, ea);
-		update_value(ea->export_lst, "PWD", export_new_pwd, ea);
+		update_value(ea->env_lst, "PWD", new_pwd);
+		update_value(ea->export_lst, "PWD", export_new_pwd);
 		free(export_new_pwd);
 	}
-	update_value(ea->env_lst, "OLDPWD", pwd, ea);
-	update_value(ea->export_lst, "OLDPWD", export_pwd, ea);
+	update_value(ea->env_lst, "OLDPWD", pwd);
+	update_value(ea->export_lst, "OLDPWD", export_pwd);
 	free(pwd);
 	free(export_pwd);
 }
