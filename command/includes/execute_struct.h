@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   execute_struct.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhirabay  <mhirabay@student.42tokyo.j      +#+  +:+       +#+        */
+/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/15 14:50:54 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/15 21:41:19 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef EXECUTE_STRUCT_H
 # define EXECUTE_STRUCT_H
@@ -18,15 +17,6 @@
 # include "parser/parser.h"
 
 typedef void(*	t_content_f)(void *);
-
-// typedef struct s_exec_attr
-// {
-// 	char *const	*command;
-// 	char		*infile;
-// 	char		*outfile;
-// 	t_list		*env_lst;
-// 	t_list		*export_lst;
-// }	t_exec_attr;
 
 typedef struct s_exec_attr
 {
@@ -67,4 +57,3 @@ bool		open_files(t_cmd *cmd, t_exec_attr *ea);
 bool		open_files_in_pipe(t_cmd *cmd, t_exec_attr *ea);
 
 #endif
-

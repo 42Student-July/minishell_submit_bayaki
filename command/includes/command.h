@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/15 17:32:19 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/15 21:40:53 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ char		**convert_envlst_to_array(t_exec_attr *ea);
 char		*create_env_line(char *key, char *value, bool is_end);
 char		*create_env_line_non_value(char *key, bool is_end);
 
-
 // create_cmd.c
 bool		is_dollar(char *arg);
 char		*convert_env_var(t_exec_attr *ea, char *arg);
@@ -102,5 +101,11 @@ char		*create_cmd(char *path, char *command, DIR *dirp);
 char		*concat_path_and_cmd(char *path, char *command);
 bool		is_invalid_permission(\
 	char *path, char *command, size_t cmd_i, t_exec_attr *ea);
+
+// redirect_utils.c
+void		redirect_dev_null(t_exec_attr *ea);
+bool		open_files_in(t_cmd *cmd);
+bool		open_files_out(t_cmd *cmd);
+void		change_fd(t_list *files, bool is_in);
 
 #endif
