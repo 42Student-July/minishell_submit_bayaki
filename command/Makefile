@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tkirihar <tkirihar@student.42tokyo.jp>     +#+  +:+       +#+         #
+#    By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/02 13:21:26 by mhirabay          #+#    #+#              #
-#    Updated: 2022/03/09 23:39:55 by tkirihar         ###   ########.fr        #
+#    Updated: 2022/03/15 16:33:03 by mhirabay         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRCNAME	:=	execute_builtin.c \
 			exec_attribute_utils.c \
 			cmd_utils.c \
 			execve_error.c \
-
+			create_cmd_utils.c \
 
 SRCS	:= $(addprefix $(SRCDIR), $(SRCNAME))
 

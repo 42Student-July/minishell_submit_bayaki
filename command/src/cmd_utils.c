@@ -6,25 +6,11 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/15 15:26:46 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/15 15:50:58 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "command.h"
-
-char	*get_filename(t_cmd *c, int io)
-{
-	t_file	*file;
-
-	if (io == IN)
-		file = c->filenames_in->content;
-	else if (io == OUT)
-		file = c->filenames_out->content;
-	else
-		return (NULL);
-	return (file->filename);
-}
 
 bool	is_dir(char *cmd_path)
 {
@@ -39,10 +25,15 @@ bool	is_dir(char *cmd_path)
 bool	*malloc_has_not_permission(size_t size)
 {
 	bool	*ret;
+	size_t	i;
 
-	ret = (bool *)malloc(sizeof(bool) * size);
-	if (ret == NULL)
-		exit(EXIT_FAILURE);
+	i = 0;
+	ret = (bool *)ft_xmalloc(sizeof(bool) * size);
+	while (i < size)
+	{
+		ret[0] = false;
+		i++;
+	}
 	return (ret);
 }
 

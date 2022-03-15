@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/15 15:34:53 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/15 15:50:00 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	no_pipe_process(t_exec_attr *ea)
 	t_cmd	*c;
 
 	c = get_cmd(ea);
-	ea->has_not_permission = malloc_has_not_permission(1);
+	ea->has_not_permission = malloc_has_not_permission(sizeof(bool) * 1);
 	if (has_redirect_file(c))
 		if (!open_files(c, ea))
 			return (free(ea->has_not_permission));
