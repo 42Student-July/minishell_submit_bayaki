@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   word_split.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
+/*   Updated: 2022/03/15 15:02:55 by akito            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lexer.h"
 #include "libft.h"
 #include <stdio.h>
@@ -52,15 +64,14 @@ void	split_token(t_list **lst, t_token **token)
 
 void	split_process(t_list **lst, t_token **token, t_list *lst_prev)
 {
-	if (lst_prev != NULL &&
-		is_redirect_without_heredoc(((t_token *)lst_prev->content)->type))
+	if (lst_prev != NULL
+		&& is_redirect_without_heredoc(((t_token *)lst_prev->content)->type))
 	{
 		if (splitted_token_count((*token)->literal) == 1)
-			split_token(lst ,token);
+			split_token(lst, token);
 		else
 		{
-			free((*token)->literal);
-			(*token)->literal = NULL;
+			delete_str(&((*token)->literal));
 			return ;
 		}
 	}
