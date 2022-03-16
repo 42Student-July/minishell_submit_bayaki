@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   self_unset.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 09:38:19 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 15:40:11 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ int	exec_self_unset(t_cmd *cmd, t_exec_attr *ea)
 		if (is_same_str(arg, "PWD"))
 		{
 			free(ea->current_pwd);
-			ea->current_pwd = ft_strdup("");
-			if (ea->current_pwd == NULL)
-				abort_minishell(MALLOC_ERROR, ea);
+			ea->current_pwd = ft_xstrdup("");
 		}
 		lst = lst->next;
 	}

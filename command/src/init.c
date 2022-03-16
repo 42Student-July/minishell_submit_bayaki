@@ -6,7 +6,7 @@
 /*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 15:22:20 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/16 15:37:41 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ void	init_new(t_exec_attr **ea)
 {
 	extern char	**environ;
 
-	*ea = (t_exec_attr *)malloc(sizeof(t_exec_attr));
-	if (*ea == NULL)
-		abort_minishell(MALLOC_ERROR, *ea);
+	*ea = (t_exec_attr *)ft_xmalloc(sizeof(t_exec_attr));
 	store_allenv_in_envlst(*ea, environ);
 	store_allenv_in_export(*ea, environ);
 	store_stdfd(*ea);

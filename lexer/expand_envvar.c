@@ -6,22 +6,13 @@
 /*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 15:24:17 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/16 15:34:10 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 #include "libft.h"
 #include "common.h"
-
-/*
-
-hoge$HOME"HOGE"
-
-$HOME
--> /home/akky
-hoge + /home/akky + "HOGE"
-*/
 
 char	*expand_single_envvar(char *str, const char *from, const char *to,
 		size_t *i)

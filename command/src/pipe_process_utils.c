@@ -6,7 +6,7 @@
 /*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 22:18:03 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 14:59:40 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/16 15:38:07 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,11 @@ void	malloc_pipe_fd(t_pipe_attr *pa)
 {
 	int	i;
 
-	pa->pipe_fd = (int **)malloc(sizeof(int *) * pa->pipe_count);
-	if (pa->pipe_fd == NULL)
-	{
-		printf("malloc error\n");
-		exit(EXIT_FAILURE);
-	}
+	pa->pipe_fd = (int **)ft_xmalloc(sizeof(int *) * pa->pipe_count);
 	i = 0;
 	while (i < pa->pipe_count)
 	{
-		pa->pipe_fd[i] = (int *)malloc(sizeof(int) * 2);
-		if (pa->pipe_fd[i] == NULL)
-		{
-			printf("malloc error\n");
-			exit(EXIT_FAILURE);
-		}
+		pa->pipe_fd[i] = (int *)ft_xmalloc(sizeof(int) * 2);
 		i++;
 	}
 	return ;
@@ -38,12 +28,7 @@ void	malloc_pipe_fd(t_pipe_attr *pa)
 
 void	malloc_cpid_array(t_pipe_attr *pa)
 {
-	pa->cpid_array = (int *)malloc(sizeof(int *) * (pa->pipe_count + 1));
-	if (pa->cpid_array == NULL)
-	{
-		printf("malloc error\n");
-		exit(EXIT_FAILURE);
-	}
+	pa->cpid_array = (int *)ft_xmalloc(sizeof(int *) * (pa->pipe_count + 1));
 }
 
 void	make_pipe(t_pipe_attr *pa)

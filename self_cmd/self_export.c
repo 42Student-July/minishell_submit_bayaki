@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   self_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 09:37:58 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 15:41:53 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	export_with_args(t_cmd *cmd, t_exec_attr *ea, bool *exit_stat)
 	while (lst != NULL)
 	{
 		arg = (char *)(lst->content);
-		// ft_splitでは引数が"a="の場合と"a"の判別がつけられない実装になっている
+		// 引数が"a="の場合と"a"の判別がつけられない実装になっている
 		// そのため、strchrでまず引数に=があるか判定してから、各実装に入る
 		if (ft_strchr(arg, '=') == NULL)
 		{
@@ -112,7 +112,7 @@ void	export_with_args(t_cmd *cmd, t_exec_attr *ea, bool *exit_stat)
 				if (ret == NO_VALUE)
 				{
 					// valueがnullだけど=が存在する場合、valueには\0を入れる。
-					kv[VALUE] = ft_strdup("");
+					kv[VALUE] = ft_xstrdup("");
 					if (kv[VALUE] == NULL)
 						abort_minishell_with(MALLOC_ERROR, ea, kv);
 				}

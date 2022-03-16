@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   self_cd_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 08:58:27 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 09:37:26 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 15:39:51 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ void	update_all_environ(char *new_pwd, t_exec_attr *ea)
 	pwdlst = get_lst_by_key(ea->env_lst, "PWD");
 	if (pwdlst == NULL)
 		// unsetでPWDがなくなったケース
-		pwd = ft_strdup("");
+		pwd = ft_xstrdup("");
 	else
 	{
 		// export PWD= PWDの値を空文字に上書きしたケース
 		if (ft_strlen(ft_kvsget_value(pwdlst->content)) == 0)
-			pwd = ft_strdup("");
+			pwd = ft_xstrdup("");
 		else
-			pwd = ft_strdup(ea->current_pwd);
+			pwd = ft_xstrdup(ea->current_pwd);
 	}
 	free(ea->current_pwd);
-	ea->current_pwd = ft_strdup(new_pwd);
+	ea->current_pwd = ft_xstrdup(new_pwd);
 	export_pwd = create_export_value(pwd);
 	if (pwdlst != NULL)
 	{
@@ -62,9 +62,7 @@ char	*create_new_pwd(char *pwd, char *path)
 		new_value_len = (pwd_len + path_len + NULL_CHAR);
 	else
 		new_value_len = (pwd_len + SLASH + path_len + NULL_CHAR);
-	new_value = (char *)ft_calloc(sizeof(char), new_value_len);
-	if (new_value == NULL)
-		return (NULL);
+	new_value = (char *)ft_xcalloc(sizeof(char), new_value_len);
 	ft_strlcat(new_value, pwd, new_value_len);
 	if (pwd[pwd_len - 1] != '/')
 		ft_strlcat(new_value, "/", new_value_len);
@@ -108,5 +106,5 @@ char	*create_str_removed_end(char *path)
 	while (path[i] != '\0')
 		i++;
 	path[i - 1] = '\0';
-	return (ft_strdup(path));
+	return (ft_xstrdup(path));
 }

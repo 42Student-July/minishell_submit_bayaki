@@ -6,7 +6,7 @@
 /*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 15:24:30 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/16 15:40:51 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ char	*join_string(char *a, char *b)
 
 	if (!a || !b)
 		exit(EXIT_FAILURE);
-	c = ft_strjoin(a, b);
-	if (!c)
-		exit(EXIT_FAILURE);
+	c = ft_xstrjoin(a, b);
 	free(a);
 	free(b);
 	return (c);
