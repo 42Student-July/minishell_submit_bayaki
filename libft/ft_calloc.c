@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akito     <akito@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/16 15:59:34 by akito             #+#    #+#             */
+/*   Updated: 2022/03/16 16:02:20 by akito            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
-#include <limits.h>
 #include <errno.h>
+#include <limits.h>
 #include <stdint.h>
 
 void	*ft_calloc(size_t nmemb, size_t size)

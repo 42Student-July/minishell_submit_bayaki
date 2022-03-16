@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_separate.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/16 15:59:34 by akito             #+#    #+#             */
+/*   Updated: 2022/03/16 16:08:32 by akito            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include <stdlib.h>
 
@@ -11,12 +23,12 @@ static char	*ft_strcdup(const char *str, char c)
 	return (ft_substr(str, 0, len));
 }
 
-// 最初にでてきたseparate文字で文字列を分解する
 char	**ft_separate(char *str, char separator)
 {
-	char *sep_ptr;
-	char **array;
+	char	*sep_ptr;
+	char	**array;
 
+	// 最初にでてきたseparate文字で文字列を分解する
 	if (str == NULL)
 		return (NULL);
 	sep_ptr = ft_strchr(str, separator);
