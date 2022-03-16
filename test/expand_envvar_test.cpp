@@ -16,7 +16,6 @@ extern "C"
 }
 
 int g_exit_status = 0;
-t_mem_mgt	g_mem_mgt = {NULL, 0, 0};
 
 TEST(env, replace_string)
 {
