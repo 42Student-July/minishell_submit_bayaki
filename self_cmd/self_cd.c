@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 14:04:13 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 16:26:32 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ int	create_virtual_path(char *path, t_exec_attr *ea)
 	return (EXIT_FAILURE);
 }
 
-
-
 char	*get_new_pwd(char *path, t_exec_attr *ea)
 {
 	char	*tmp;
@@ -57,7 +55,7 @@ char	*get_new_pwd(char *path, t_exec_attr *ea)
 	if (has_diff(path, ea))
 	{
 		tmp = concat_new_pwd(ea->current_pwd, path);
-		new_pwd = remove_relative(tmp, ea);
+		new_pwd = remove_relative(tmp);
 		free(tmp);
 	}
 	else

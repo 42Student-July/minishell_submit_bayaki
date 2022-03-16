@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 14:57:01 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 16:37:31 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,13 @@ void		update_all_environ(char *new_pwd, t_exec_attr *ea);
 // self_cd_utils_2.c
 char		*create_str_removed_end(char *path);
 bool		has_diff(char *path, t_exec_attr *ea);
-char		*remove_relative(char *path, t_exec_attr *ea);
+char		*remove_relative(char *path);
+
+// self_cd_utils_3.c
+char		*create_str_removed_end(char *path);
+size_t		count_rm_rel_path(char **split);
+bool		is_relative_exist(char *split_path);
+void		process_ddot(char *path, char **sp_rm_rel, size_t *j);
 
 // self_echo.c
 int			exec_self_echo(t_cmd *cmd, t_exec_attr *ea);
