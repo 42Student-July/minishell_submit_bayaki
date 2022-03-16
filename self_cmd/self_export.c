@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   self_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
 /*   Updated: 2022/03/16 11:14:41 by mhirabay         ###   ########.fr       */

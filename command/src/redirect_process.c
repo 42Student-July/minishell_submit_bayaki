@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_process.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/15 20:38:39 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 14:46:55 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	redirect(t_cmd *cmd, t_exec_attr *ea)
 
 void	reset_stdfd(t_exec_attr *ea)
 {
-	dup2(ea->stdfd[0], STDIN_FILENO);
-	dup2(ea->stdfd[1], STDOUT_FILENO);
-	dup2(ea->stdfd[2], STDERR_FILENO);
+	ft_xdup2(ea->stdfd[0], STDIN_FILENO);
+	ft_xdup2(ea->stdfd[1], STDOUT_FILENO);
+	ft_xdup2(ea->stdfd[2], STDERR_FILENO);
 }
 
 bool	open_files(t_cmd *cmd, t_exec_attr *ea)

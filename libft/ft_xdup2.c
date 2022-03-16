@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iscap_alpha.c                                   :+:      :+:    :+:   */
+/*   ft_xdup2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akito     <akito@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:59:34 by akito             #+#    #+#             */
-/*   Updated: 2022/03/16 16:01:58 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/16 15:59:34 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <unistd.h>
 
-int	ft_iscap_alpha(int c)
+void	ft_xdup2(int fd, int fd2)
 {
-	return (('A' <= c && c <= 'Z'));
+	if (dup2(fd, fd2) == -1)
+	{
+		perror("dup2");
+		exit(EXIT_FAILURE);
+	}
 }

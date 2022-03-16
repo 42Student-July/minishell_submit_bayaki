@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iscap_alpha.c                                   :+:      :+:    :+:   */
+/*   ft_xclose.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akito     <akito@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:59:34 by akito             #+#    #+#             */
-/*   Updated: 2022/03/16 16:01:58 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/16 16:07:34 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <unistd.h>
 
-int	ft_iscap_alpha(int c)
+void	ft_xclose(int fd)
 {
-	return (('A' <= c && c <= 'Z'));
+	if (close(fd) == -1)
+	{
+		perror("close");
+		exit(EXIT_FAILURE);
+	}
 }

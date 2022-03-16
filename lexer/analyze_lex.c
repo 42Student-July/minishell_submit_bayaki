@@ -6,7 +6,7 @@
 /*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 15:26:14 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/16 15:33:27 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ bool	should_return(t_lexer_product *lexer_product)
 	}
 	if (!is_valid_tokens(lexer_product->token_list))
 	{
-		write(STDERR, "syntax error\n", 13);
+		if (write(STDERR, "syntax error\n", 13))
+			exit(EXIT_FAILURE);
 		ft_lstclear(&lexer_product->token_list, delete_token);
 		free(lexer_product);
 		return (true);

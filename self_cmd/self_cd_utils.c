@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   self_cd_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 08:58:27 by mhirabay          #+#    #+#             */
 /*   Updated: 2022/03/16 14:00:59 by mhirabay         ###   ########.fr       */
@@ -66,9 +66,7 @@ char	*concat_new_pwd(char *pwd, char *path)
 		new_value_len = (pwd_len + path_len + NULL_CHAR);
 	else
 		new_value_len = (pwd_len + SLASH + path_len + NULL_CHAR);
-	new_value = (char *)ft_calloc(sizeof(char), new_value_len);
-	if (new_value == NULL)
-		return (NULL);
+	new_value = (char *)ft_xcalloc(sizeof(char), new_value_len);
 	ft_strlcat(new_value, pwd, new_value_len);
 	if (pwd[pwd_len - 1] != '/')
 		ft_strlcat(new_value, "/", new_value_len);
@@ -101,4 +99,15 @@ bool	is_end_of_slash(char *path)
 	if (path[i - 1] == '/')
 		return (true);
 	return (false);
+}
+
+char	*create_str_removed_end(char *path)
+{
+	size_t	i;
+
+	i = 0;
+	while (path[i] != '\0')
+		i++;
+	path[i - 1] = '\0';
+	return (ft_xstrdup(path));
 }
