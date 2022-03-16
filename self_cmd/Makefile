@@ -6,7 +6,7 @@
 #    By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/10 14:19:20 by mhirabay          #+#    #+#              #
-#    Updated: 2022/03/04 21:28:37 by mhirabay         ###   ########.fr        #
+#    Updated: 2022/03/16 14:57:20 by mhirabay         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ INCLUDES	=	$(addprefix -I, $(HEADERS))
 SRCS =  self_pwd.c \
 		self_cd.c \
 		self_cd_utils.c \
+		self_cd_utils_2.c \
 		self_echo.c \
 		self_exit.c \
 		self_env.c \

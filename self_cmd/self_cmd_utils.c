@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 10:09:38 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 13:55:43 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,13 @@ void	print_error_msg_with_var(char *cmd_name, char *var)
 	ft_putstr_fd(INVALID_IDENTIFER_MSG, STDERR_FILENO);
 }
 
-void	print_error(char *cmd, char *input)
+int	print_error(char *cmd, char *input)
 {
 	ft_putstr_fd("bash: ", STDERR_FILENO);
 	ft_putstr_fd(cmd, STDERR_FILENO);
 	ft_putstr_fd(": ", STDERR_FILENO);
 	perror(input);
+	return (EXIT_FAILURE);
 }
 
 bool	has_caps(char *path)

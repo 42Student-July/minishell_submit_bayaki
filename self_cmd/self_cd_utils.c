@@ -6,11 +6,27 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 08:58:27 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 09:37:26 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 14:00:59 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "self_cmd.h"
+
+char	*create_pwd(t_list *pwdlst, t_exec_attr *ea)
+{
+	char	*pwd;
+
+	if (pwdlst == NULL)
+		pwd = ft_xstrdup("");
+	else
+	{
+		if (ft_strlen(ft_kvsget_value(pwdlst->content)) == 0)
+			pwd = ft_xstrdup("");
+		else
+			pwd = ft_xstrdup(ea->current_pwd);
+	}
+	return (pwd);
+}
 
 void	update_all_environ(char *new_pwd, t_exec_attr *ea)
 {
@@ -20,19 +36,9 @@ void	update_all_environ(char *new_pwd, t_exec_attr *ea)
 	t_list	*pwdlst;
 
 	pwdlst = get_lst_by_key(ea->env_lst, "PWD");
-	if (pwdlst == NULL)
-		// unsetでPWDがなくなったケース
-		pwd = ft_strdup("");
-	else
-	{
-		// export PWD= PWDの値を空文字に上書きしたケース
-		if (ft_strlen(ft_kvsget_value(pwdlst->content)) == 0)
-			pwd = ft_strdup("");
-		else
-			pwd = ft_strdup(ea->current_pwd);
-	}
+	pwd = create_pwd(pwdlst, ea);
 	free(ea->current_pwd);
-	ea->current_pwd = ft_strdup(new_pwd);
+	ea->current_pwd = ft_xstrdup(new_pwd);
 	export_pwd = create_export_value(pwd);
 	if (pwdlst != NULL)
 	{
@@ -47,7 +53,7 @@ void	update_all_environ(char *new_pwd, t_exec_attr *ea)
 	free(export_pwd);
 }
 
-char	*create_new_pwd(char *pwd, char *path)
+char	*concat_new_pwd(char *pwd, char *path)
 {
 	char	*new_value;
 	size_t	new_value_len;
@@ -56,8 +62,6 @@ char	*create_new_pwd(char *pwd, char *path)
 
 	pwd_len = ft_strlen(pwd);
 	path_len = ft_strlen(path);
-	// virtual pathの場合、最後に"/"が入る場合があるため、新しい"/"とかぶってしまう。
-	// なので、/を余分に付け加えないようにする
 	if (pwd[pwd_len - 1] == '/')
 		new_value_len = (pwd_len + path_len + NULL_CHAR);
 	else
@@ -79,7 +83,7 @@ bool	is_symlink(char *path, t_exec_attr *ea)
 	char		*new_pwd;
 
 	pwd = ea->current_pwd;
-	new_pwd = create_new_pwd(pwd, path);
+	new_pwd = concat_new_pwd(pwd, path);
 	lstat(new_pwd, &buf);
 	free(new_pwd);
 	return (S_ISLNK(buf.st_mode));
@@ -90,7 +94,6 @@ bool	is_end_of_slash(char *path)
 	size_t	i;
 
 	i = 0;
-	// slash onlyの場合は対象外とする
 	if (ft_strlen(path) == 1)
 		return (false);
 	while (path[i] != '\0')
@@ -98,15 +101,4 @@ bool	is_end_of_slash(char *path)
 	if (path[i - 1] == '/')
 		return (true);
 	return (false);
-}
-
-char	*create_str_removed_end(char *path)
-{
-	size_t	i;
-
-	i = 0;
-	while (path[i] != '\0')
-		i++;
-	path[i - 1] = '\0';
-	return (ft_strdup(path));
 }

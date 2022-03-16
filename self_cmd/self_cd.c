@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 09:37:34 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 14:04:13 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool	is_current_dir_exist(t_exec_attr *ea)
 	return (true);
 }
 
-void	create_virtual_path(char *path, t_exec_attr *ea)
+int	create_virtual_path(char *path, t_exec_attr *ea)
 {
 	char	*pwd;
 	char	*new_pwd;
@@ -37,177 +37,26 @@ void	create_virtual_path(char *path, t_exec_attr *ea)
 	reset_stdfd(ea);
 	if (new_pwd == NULL)
 	{
-		new_pwd = create_new_pwd(pwd, path);
-		ft_putstr_fd("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n", STDERR_FILENO);
+		new_pwd = concat_new_pwd(pwd, path);
+		ft_putstr_fd("cd: error retrieving current directory: ", STDERR_FILENO);
+		ft_putstr_fd("getcwd: cannot access parent directories", STDERR_FILENO);
+		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 	}
 	update_all_environ(new_pwd, ea);
 	free(new_pwd);
+	return (EXIT_FAILURE);
 }
 
-char *remove_relative(char *path, t_exec_attr *ea)
+
+
+char	*get_new_pwd(char *path, t_exec_attr *ea)
 {
-	char	**split;
-	char	**new_split;
-	char	*new_str;
-	size_t	i;
-	size_t	new_str_len;
-	size_t	ddot_count;
-	size_t	dot_count;
-	size_t	blank_count;
-	long long	new_split_len;
-
-	i = 0;
-	new_str_len = 0;
-	ddot_count = 0;
-	dot_count = 0;
-	blank_count = 0;
-	split = ft_split(path, '/');
-	while (split[i] != NULL)
-	{
-		if (is_same_str("", split[i]))
-		{
-			blank_count++;
-		}
-		if (is_same_str(".", split[i]))
-		{
-			dot_count++;
-		}
-		if (is_same_str("..", split[i]))
-		{
-			ddot_count++;
-		}
-		i++;
-	}
-	new_split_len = i - blank_count - dot_count - (ddot_count * 2) + 1;
-	if (new_split_len < 0)
-	{
-		new_str = ft_strdup("/");
-		free_char_dptr(split);
-		return (new_str);
-	}
-	// ループの順番によっては..の分の要素数を確保しないといけない場合があるのでsizeを大きくする
-	new_split_len = i - blank_count - dot_count + 1;
-	new_split = (char **)malloc(sizeof(char *) * new_split_len);
-	if (new_split == NULL)
-		abort_minishell(MALLOC_ERROR, ea);
-	i = 0;
-	size_t j = 0;
-	while (split[i] != NULL)
-	{	
-		// もしパスに..が存在する場合、前のパスを削除する
-		// ただし絶対パスの一番目を除く
-		if (is_same_str("", split[i]))
-		{
-			i++;
-			continue ;
-		}
-		if (is_same_str(".", split[i]))
-		{
-			i++;
-			continue ;
-		}
-		if (is_same_str("..", split[i]))
-		{
-			// ddotがあったら一個前のnew_splitをfreeする
-			// そのときjをデクリメントする
-			// ただしjがマイナスになる場合はやめる
-			if (j != 0)
-			{
-				free(new_split[j - 1]);
-				new_split[j - 1] = NULL;
-				j--;
-			}
-			i++;
-			continue ;
-		}
-		new_split[j] = ft_strjoin("/", split[i]);
-		new_str_len += ft_strlen(new_split[j]);
-		j++;
-		i++;
-	}
-	new_split[j] = NULL;
-	// ..の数だけ後ろからpathを削除していく
-	// もしnew_splitの値がすべて空文字 or ..だった場合、cdの向き先はhome(/)になる
-	i = 0;
-	new_str = (char *)calloc(sizeof(char), new_str_len + 1);
-	if (new_str == NULL)
-		abort_minishell(MALLOC_ERROR, ea);
-	i = 0;
-	while (new_split[i] != NULL)
-	{
-		ft_strlcat(new_str, new_split[i], new_str_len + 1);
-		i++;
-	}
-	if (is_end_of_slash(new_str))
-	{
-		path = create_str_removed_end(new_str);
-		if (path == NULL)
-			abort_minishell(MALLOC_ERROR, ea);
-	}
-	free_char_dptr(split);
-	free_char_dptr(new_split);
-	return (new_str);
-}
-
-bool	has_diff(char *path, t_exec_attr *ea)
-{
-	char		*cwd;
-	char		*pwd;
-	bool		flag;
-	char		*pwd_del_dot;
-	struct stat buf;
-
-	redirect_dev_null(ea);
-	cwd = getcwd(NULL, 0);
-	reset_stdfd(ea);
-	if (*path == '/')
-		pwd = path;
-	else
-		pwd = create_new_pwd(ea->current_pwd, path);
-	pwd_del_dot = remove_relative(pwd, ea);
-	if (lstat(pwd_del_dot, &buf) == -1)
-	{
-		if (*path != '/')
-			free(pwd);
-		free(pwd_del_dot);
-		free(cwd);
-		return (false);
-	}
-	flag = is_same_str(cwd, pwd_del_dot);
-	if (*path != '/')
-		free(pwd);
-	free(pwd_del_dot);
-	free(cwd);
-	return (!flag);
-}
-
-int	x_chdir(char *arg, t_exec_attr *ea)
-{
-	char	*new_pwd;
-	char	*path;
 	char	*tmp;
+	char	*new_pwd;
 
-	if (chdir(arg) == -1)
-	{
-		print_error(CD, arg);
-		return (1);
-	}
-	if (!is_current_dir_exist(ea))
-	{
-		create_virtual_path(arg, ea);
-		return (1);
-	}
-	if (is_end_of_slash(arg))
-	{
-		path = create_str_removed_end(arg);
-		if (path == NULL)
-			abort_minishell(MALLOC_ERROR, ea);
-	}
-	else
-		path = ft_strdup(arg);
 	if (has_diff(path, ea))
 	{
-		tmp = create_new_pwd(ea->current_pwd, path);
+		tmp = concat_new_pwd(ea->current_pwd, path);
 		new_pwd = remove_relative(tmp, ea);
 		free(tmp);
 	}
@@ -217,11 +66,27 @@ int	x_chdir(char *arg, t_exec_attr *ea)
 		new_pwd = getcwd(NULL, 0);
 		reset_stdfd(ea);
 		if (new_pwd == NULL)
-		{
-			print_error(PWD, path);
-			return (1);
-		}
+			return (NULL);
 	}
+	return (new_pwd);
+}
+
+int	x_chdir(char *arg, t_exec_attr *ea)
+{
+	char	*new_pwd;
+	char	*path;
+
+	if (chdir(arg) == -1)
+		return (print_error(CD, arg));
+	if (!is_current_dir_exist(ea))
+		return (create_virtual_path(arg, ea));
+	if (is_end_of_slash(arg))
+		path = create_str_removed_end(arg);
+	else
+		path = ft_xstrdup(arg);
+	new_pwd = get_new_pwd(path, ea);
+	if (new_pwd == NULL)
+		return (print_error(PWD, path));
 	update_all_environ(new_pwd, ea);
 	free(path);
 	free(new_pwd);
