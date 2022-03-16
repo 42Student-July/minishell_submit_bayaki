@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_process_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 22:18:03 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 15:38:07 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/16 21:13:30 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	make_pipe(t_pipe_attr *pa)
 {
 	if (pa->cmd_i != pa->pipe_count)
 	{
-		pipe(pa->pipe_fd[pa->cmd_i]);
+		ft_xpipe(pa->pipe_fd[pa->cmd_i]);
 	}
 }
 
