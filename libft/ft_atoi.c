@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akito     <akito@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/16 15:59:34 by akito             #+#    #+#             */
+/*   Updated: 2022/03/16 16:02:12 by akito            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
-#include <limits.h>
 #include <errno.h>
+#include <limits.h>
 int			ft_atoi(const char *nptr);
 static void	read_sign(int *sign, size_t *i, char c);
 static int	return_value(long long result, int sign, int overflow);

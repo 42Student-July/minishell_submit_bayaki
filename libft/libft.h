@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/16 15:59:34 by akito             #+#    #+#             */
+/*   Updated: 2022/03/16 16:09:13 by akito            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
@@ -39,7 +50,7 @@ int					ft_strncmp(const char *s1, const char *s2, size_t n);
 void				*ft_memchr(const void *s, int c, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 char				*ft_strnstr(const char *big, const char *little,
-					size_t len);
+						size_t len);
 int					ft_atoi(const char *nptr);
 void				*ft_calloc(size_t nmemb, size_t size);
 char				*ft_strdup(const char *s);
@@ -80,7 +91,7 @@ void				ft_put_cmd_error(char *cmd, char *message);
 void				ft_put_arg_error(char *cmd, char *arg, char *message);
 bool				ft_atol(const char *nptr, long *num);
 char				*ft_replace_str(const char *src, const char *target,
-					const char *replace);
+						const char *replace);
 
 t_list				*ft_lstnew(void *content);
 void				ft_lstadd_front(t_list **lst, t_list *new_elm);
@@ -91,11 +102,11 @@ void				ft_lstdelone(t_list *lst, void (*del)(void *));
 void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
-					void (*del)(void *));
+						void (*del)(void *));
 bool				ft_lstdel(t_list *lst, t_list *target);
 t_list				*ft_my_lstpop_front(t_list **lst);
 void				ft_lstiter_with_var(t_list *lst, void (*f)(void *, void *),
-					void *var);
+						void *var);
 
 void				*ft_xmalloc(size_t size);
 char				*ft_xstrdup(const char *s);
@@ -104,7 +115,7 @@ void				*ft_xcalloc(size_t nmemb, size_t size);
 char				*ft_xsubstr(char const *s, unsigned int start, size_t len);
 char				**ft_xsplit(char const *str, char c);
 t_list				*ft_xlstnew(void *content);
-int				ft_xdup(int fd);
+int					ft_xdup(int fd);
 void				ft_xdup2(int fd1, int fd2);
 void				ft_xclose(int fd);
 

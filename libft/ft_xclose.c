@@ -1,7 +1,19 @@
-#include "libft.h"
-#include  <unistd.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_xclose.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/16 15:59:34 by akito             #+#    #+#             */
+/*   Updated: 2022/03/16 16:07:34 by akito            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void ft_xclose(int fd)
+#include "libft.h"
+#include <unistd.h>
+
+void	ft_xclose(int fd)
 {
 	if (close(fd) == -1)
 	{
