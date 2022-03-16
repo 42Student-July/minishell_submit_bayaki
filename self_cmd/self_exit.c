@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 10:39:45 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 11:17:06 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ bool	check_argc(t_cmd *cmd)
 	return (EXIT_SUCCESS);
 }
 
-
 int	exec_self_exit(t_cmd *cmd, bool is_pipe)
 {
 	unsigned int	exit_status;
@@ -76,7 +75,6 @@ int	exec_self_exit(t_cmd *cmd, bool is_pipe)
 		exit(255);
 	}
 	free(arg1);
-
 	exit_status = arg1_num;
 	if (exit_status > 255)
 		exit(exit_status % 256);

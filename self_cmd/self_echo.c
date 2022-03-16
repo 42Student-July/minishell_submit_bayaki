@@ -6,16 +6,15 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 10:17:38 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 11:18:33 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "self_cmd.h"
 
-void	check_option(t_list *args, bool *display_return)
+void	check_option(t_list *args, bool *display_return, char *str)
 {
 	size_t	i;
-	char	*str;
 
 	while (args != NULL)
 	{
@@ -48,10 +47,11 @@ int	exec_self_echo(t_cmd *cmd, t_exec_attr *ea)
 	char	*str;
 	bool	display_return;
 
+	str = NULL;
 	args = cmd->args->next;
 	(void)ea;
 	display_return = false;
-	check_option(args, &display_return);
+	check_option(args, &display_return, str);
 	while (args != NULL)
 	{
 		str = args->content;
