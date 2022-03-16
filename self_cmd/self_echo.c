@@ -6,25 +6,17 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 09:37:44 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 10:17:38 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "self_cmd.h"
-#include <stdbool.h>
 
-int	exec_self_echo(t_cmd *cmd, t_exec_attr *ea)
+void	check_option(t_list *args, bool *display_return)
 {
-	t_list	*args;
+	size_t	i;
 	char	*str;
-	int		i;
-	bool display_return ;
 
-	args = cmd->args->next;
-	(void)ea;
-	display_return = false;
-	// TODO: pipeでつないだときへの対応、引数が2つの場合にも対応
 	while (args != NULL)
 	{
 		str = args->content;
@@ -34,7 +26,7 @@ int	exec_self_echo(t_cmd *cmd, t_exec_attr *ea)
 		while (str[i])
 		{
 			if (ft_strchr("n", str[i]) == NULL)
-				break;
+				break ;
 			i++;
 		}
 		if (str[1] == '\0' || str[i] != '\0')
@@ -43,11 +35,23 @@ int	exec_self_echo(t_cmd *cmd, t_exec_attr *ea)
 		while (str[i] != '\0')
 		{
 			if (str[i] == 'n')
-				display_return = true;
+				*display_return = true;
 			i++;
 		}
 		args = args->next;
 	}
+}
+
+int	exec_self_echo(t_cmd *cmd, t_exec_attr *ea)
+{
+	t_list	*args;
+	char	*str;
+	bool	display_return;
+
+	args = cmd->args->next;
+	(void)ea;
+	display_return = false;
+	check_option(args, &display_return);
 	while (args != NULL)
 	{
 		str = args->content;
