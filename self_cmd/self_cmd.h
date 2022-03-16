@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 16:37:31 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 16:54:15 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,11 @@ int			exec_self_cd(t_cmd *cmd, t_exec_attr *ea);
 char		*concat_new_pwd(char *pwd, char *path);
 bool		is_symlink(char *path, t_exec_attr *ea);
 bool		is_end_of_slash(char *path);
-char		*create_str_removed_end(char *path);
 
 // self_cd_utils.c
 void		update_all_environ(char *new_pwd, t_exec_attr *ea);
 
 // self_cd_utils_2.c
-char		*create_str_removed_end(char *path);
 bool		has_diff(char *path, t_exec_attr *ea);
 char		*remove_relative(char *path);
 

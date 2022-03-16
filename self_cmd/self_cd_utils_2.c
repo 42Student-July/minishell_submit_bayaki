@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 13:52:43 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 16:35:53 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 16:46:52 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*concat_new_path(char **split, size_t new_str_len)
 	return (new_str);
 }
 
-char *remove_relative(char *path)
+char	*remove_relative(char *path)
 {
 	size_t		new_str_len;
 	long long	split_path_len;

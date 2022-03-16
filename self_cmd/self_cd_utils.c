@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   self_cd_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 08:58:27 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 14:00:59 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 16:54:03 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,15 +99,4 @@ bool	is_end_of_slash(char *path)
 	if (path[i - 1] == '/')
 		return (true);
 	return (false);
-}
-
-char	*create_str_removed_end(char *path)
-{
-	size_t	i;
-
-	i = 0;
-	while (path[i] != '\0')
-		i++;
-	path[i - 1] = '\0';
-	return (ft_xstrdup(path));
 }
