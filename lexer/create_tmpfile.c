@@ -6,7 +6,7 @@
 /*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 15:22:48 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/16 14:59:45 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	write_tmpfile(char *tmpfile, char *buf)
 		if (ret == -1)
 			exit(EXIT_FAILURE);
 	}
-	close(fd);
+	ft_xclose(fd);
 }
 
 void	create_tmpfile(char *tmpfile)
@@ -54,5 +54,5 @@ void	create_tmpfile(char *tmpfile)
 	fd = open(tmpfile, O_WRONLY | O_CREAT | O_TRUNC, 0600);
 	if (fd == -1)
 		exit(EXIT_FAILURE);
-	close(fd);
+	ft_xclose(fd);
 }

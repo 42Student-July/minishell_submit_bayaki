@@ -6,7 +6,7 @@
 /*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 22:18:03 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 14:46:53 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/16 14:59:40 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,28 +59,28 @@ void	set_pipe_fd(t_pipe_attr *pa)
 	if (pa->cmd_i == 0)
 	{
 		ft_xdup2(pa->pipe_fd[pa->cmd_i][PIPE_OUT], STDOUT_FILENO);
-		close(pa->pipe_fd[pa->cmd_i][PIPE_IN]);
-		close(pa->pipe_fd[pa->cmd_i][PIPE_OUT]);
+		ft_xclose(pa->pipe_fd[pa->cmd_i][PIPE_IN]);
+		ft_xclose(pa->pipe_fd[pa->cmd_i][PIPE_OUT]);
 	}
 	else if (pa->cmd_i == pa->pipe_count)
 	{
 		ft_xdup2(pa->pipe_fd[pa->cmd_i - 1][PIPE_IN], STDIN_FILENO);
-		close(pa->pipe_fd[pa->cmd_i - 1][PIPE_IN]);
-		close(pa->pipe_fd[pa->cmd_i - 1][PIPE_OUT]);
+		ft_xclose(pa->pipe_fd[pa->cmd_i - 1][PIPE_IN]);
+		ft_xclose(pa->pipe_fd[pa->cmd_i - 1][PIPE_OUT]);
 	}
 	else
 	{
 		ft_xdup2(pa->pipe_fd[pa->cmd_i - 1][PIPE_IN], STDIN_FILENO);
 		ft_xdup2(pa->pipe_fd[pa->cmd_i][PIPE_OUT], STDOUT_FILENO);
-		close(pa->pipe_fd[pa->cmd_i - 1][PIPE_IN]);
-		close(pa->pipe_fd[pa->cmd_i - 1][PIPE_OUT]);
-		close(pa->pipe_fd[pa->cmd_i][PIPE_IN]);
-		close(pa->pipe_fd[pa->cmd_i][PIPE_OUT]);
+		ft_xclose(pa->pipe_fd[pa->cmd_i - 1][PIPE_IN]);
+		ft_xclose(pa->pipe_fd[pa->cmd_i - 1][PIPE_OUT]);
+		ft_xclose(pa->pipe_fd[pa->cmd_i][PIPE_IN]);
+		ft_xclose(pa->pipe_fd[pa->cmd_i][PIPE_OUT]);
 	}
 }
 
 void	close_pipe(t_pipe_attr *pa)
 {
-	close(pa->pipe_fd[pa->cmd_i - 1][PIPE_IN]);
-	close(pa->pipe_fd[pa->cmd_i - 1][PIPE_OUT]);
+	ft_xclose(pa->pipe_fd[pa->cmd_i - 1][PIPE_IN]);
+	ft_xclose(pa->pipe_fd[pa->cmd_i - 1][PIPE_OUT]);
 }

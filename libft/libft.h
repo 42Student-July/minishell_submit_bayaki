@@ -105,5 +105,6 @@ char				*ft_xsubstr(char const *s, unsigned int start, size_t len);
 char				**ft_xsplit(char const *str, char c);
 t_list				*ft_xlstnew(void *content);
 void				ft_xdup2(int fd1, int fd2);
+void				ft_xclose(int fd);
 
 #endif

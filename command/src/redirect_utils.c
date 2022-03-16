@@ -6,7 +6,7 @@
 /*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 20:30:06 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 14:46:57 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/16 14:59:44 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	redirect_dev_null(t_exec_attr *ea)
 		exit(EXIT_FAILURE);
 	}
 	ft_xdup2(fd, STDOUT_FILENO);
-	close(fd);
+	ft_xclose(fd);
 }
 
 bool	open_files_in(t_cmd *cmd)
@@ -93,7 +93,7 @@ void	change_fd(t_list *files, bool is_in)
 			ft_xdup2(f->fd, STDIN_FILENO);
 		else
 			ft_xdup2(f->fd, STDOUT_FILENO);
-		close(f->fd);
+		ft_xclose(f->fd);
 		tmp = tmp->next;
 		i++;
 	}
