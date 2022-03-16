@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 08:59:22 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 09:30:15 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,14 @@
 # define INVALID_IDENTIFER 0
 # define NO_VALUE 1
 
-// error_handling.c
+// error_handle.c
 void		free_exec_attr(t_exec_attr *ea);
 void		free_char_dptr(char **split);
 void		abort_minishell(char *msg, t_exec_attr *ea);
 void		abort_minishell_with(char *msg, t_exec_attr *ea, char **split);
 void		free_lst(t_list *lst);
+
+// error_handle_2.c
 void		free_all_kvs(t_kvs *kvs);
 
 // debug.c

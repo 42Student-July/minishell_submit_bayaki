@@ -11,6 +11,7 @@ HEADERS		=	. \
 INCLUDES	=	$(addprefix -I, $(HEADERS))
 
 SRCS = 	error_handle.c \
+		error_handle_2.c \
 		debug.c \
 		print_cmd.c \
 
