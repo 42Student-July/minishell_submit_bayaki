@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 08:54:25 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 20:51:10 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ void	store_allenv_in_envlst(t_exec_attr *ea, char **environ)
 		if (split[VALUE] == NULL)
 		{
 			tmp = ft_xstrdup("");
-			ft_lstadd_back(&env_lst, ft_lstnew(ft_kvsnew(split[KEY], tmp)));
+			ft_lstadd_back(&env_lst, ft_xlstnew(ft_kvsnew(split[KEY], tmp)));
 			free(tmp);
 		}
 		else
 			ft_lstadd_back(&env_lst, \
-				ft_lstnew(ft_kvsnew(split[KEY], split[VALUE])));
+				ft_xlstnew(ft_kvsnew(split[KEY], split[VALUE])));
 		i++;
 		free_char_dptr(split);
 	}
@@ -52,7 +52,7 @@ bool	store_arg_in_env(t_exec_attr *ea, char *key, char *value)
 	else
 	{
 		ft_lstadd_back(&ea->env_lst, \
-			ft_lstnew(ft_kvsnew(key, value)));
+			ft_xlstnew(ft_kvsnew(key, value)));
 	}
 	return (true);
 }

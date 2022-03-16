@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 08:53:59 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 20:51:48 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	update_value(t_list *lst, char *key, char *new_v)
 	if (target == NULL)
 	{
 		if (!ft_lstadd_back(&lst, \
-			ft_lstnew(ft_kvsnew(key, new_v))))
+			ft_xlstnew(ft_kvsnew(key, new_v))))
 			return (false);
 		return (true);
 	}
