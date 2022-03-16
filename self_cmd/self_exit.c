@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 11:17:06 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 21:45:51 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,31 +43,15 @@ static char	*get_arg1(t_cmd *cmd)
 	return (ft_xstrtrim(arg1, " "));
 }
 
-bool	check_argc(t_cmd *cmd)
+bool	check_argc(t_cmd *cmd, unsigned int *exit_status)
 {
-	int	argc;
+	int		argc;
+	char	*arg1;
+	long	arg1_num;
 
 	argc = ft_lstsize(cmd->args);
 	if (argc == 1)
 		exit(g_exit_status);
-	if (argc > 2)
-	{
-		ft_put_cmd_error("exit", "too many arguments");
-		return (EXIT_FAILURE);
-	}
-	return (EXIT_SUCCESS);
-}
-
-int	exec_self_exit(t_cmd *cmd, bool is_pipe)
-{
-	unsigned int	exit_status;
-	char			*arg1;
-	long			arg1_num;
-
-	if (!is_pipe)
-		ft_putendl_fd("exit", STDERR_FILENO);
-	if (check_argc(cmd))
-		return (EXIT_FAILURE);
 	arg1 = get_arg1(cmd);
 	if (!is_num(arg1) || !ft_atol(arg1, &arg1_num))
 	{
@@ -75,7 +59,23 @@ int	exec_self_exit(t_cmd *cmd, bool is_pipe)
 		exit(255);
 	}
 	free(arg1);
-	exit_status = arg1_num;
+	if (argc > 2)
+	{
+		ft_put_cmd_error("exit", "too many arguments");
+		return (EXIT_FAILURE);
+	}
+	*exit_status = arg1_num;
+	return (EXIT_SUCCESS);
+}
+
+int	exec_self_exit(t_cmd *cmd, bool is_pipe)
+{
+	unsigned int	exit_status;
+
+	if (!is_pipe)
+		ft_putendl_fd("exit", STDERR_FILENO);
+	if (check_argc(cmd, &exit_status))
+		return (EXIT_FAILURE);
 	if (exit_status > 255)
 		exit(exit_status % 256);
 	else
