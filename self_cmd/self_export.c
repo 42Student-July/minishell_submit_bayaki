@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   self_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 11:14:41 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 20:55:11 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool	addlst_sort_by_ascii(t_list **export_lst, char **arg)
 	bool	flag;
 
 	flag = ft_lstadd_back(export_lst, \
-			ft_lstnew(ft_kvsnew(arg[KEY], \
+			ft_xlstnew(ft_kvsnew(arg[KEY], \
 				create_export_value(arg[VALUE]))));
 	if (!flag)
 		return (false);

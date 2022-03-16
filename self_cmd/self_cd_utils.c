@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 08:58:27 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 16:54:03 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 20:53:42 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,19 +72,6 @@ char	*concat_new_pwd(char *pwd, char *path)
 		ft_strlcat(new_value, "/", new_value_len);
 	ft_strlcat(new_value, path, new_value_len);
 	return (new_value);
-}
-
-bool	is_symlink(char *path, t_exec_attr *ea)
-{
-	struct stat	buf;
-	char		*pwd;
-	char		*new_pwd;
-
-	pwd = ea->current_pwd;
-	new_pwd = concat_new_pwd(pwd, path);
-	lstat(new_pwd, &buf);
-	free(new_pwd);
-	return (S_ISLNK(buf.st_mode));
 }
 
 bool	is_end_of_slash(char *path)

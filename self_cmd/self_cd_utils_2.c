@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 13:52:43 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 16:46:52 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 20:52:46 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	**create_rm_rel_split( \
 			process_ddot(split[i], split_path_rm_rel, &j);
 		else
 		{
-			split_path_rm_rel[j] = ft_strjoin("/", split[i]);
+			split_path_rm_rel[j] = ft_xstrjoin("/", split[i]);
 			*str_len += ft_strlen(split_path_rm_rel[j]);
 			j++;
 		}

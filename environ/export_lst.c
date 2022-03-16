@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 08:54:30 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 20:51:29 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	store_allenv_in_export(t_exec_attr *ea, char **environ)
 		if (value == NULL)
 			abort_minishell_with(MALLOC_ERROR, ea, split);
 		if (!ft_lstadd_back(&export_lst, \
-				ft_lstnew(ft_kvsnew(split[KEY], value))))
+				ft_xlstnew(ft_kvsnew(split[KEY], value))))
 			abort_minishell_with(MALLOC_ERROR, ea, split);
 		free_char_dptr(split);
 		free(value);
@@ -79,7 +79,7 @@ bool	store_arg_in_export(t_exec_attr *ea, char *key, char *value)
 	else
 	{
 		if (!ft_lstadd_back(&ea->export_lst, \
-			ft_lstnew(ft_kvsnew(key, export_value))))
+			ft_xlstnew(ft_kvsnew(key, export_value))))
 			return (false);
 	}
 	free(export_value);
