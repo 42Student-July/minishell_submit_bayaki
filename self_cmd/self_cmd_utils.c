@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 09:37:38 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 10:09:38 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,10 @@ bool	is_invalid_name(char *name)
 	size_t	i;
 
 	i = 0;
-	// 数字は頭にあったら弾く
 	if (ft_isdigit(name[i]))
 		return (true);
 	while (name[i] != '\0')
 	{
-		// 数字/文字/アンダースコアのみ許容する
 		if (!(ft_isalnum(name[i]) || name[i] == '_'))
 			return (true);
 		i++;
