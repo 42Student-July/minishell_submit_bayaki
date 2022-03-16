@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 20:30:06 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/15 20:38:34 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 14:59:44 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	redirect_dev_null(t_exec_attr *ea)
 		perror("open");
 		exit(EXIT_FAILURE);
 	}
-	dup2(fd, STDOUT_FILENO);
-	close(fd);
+	ft_xdup2(fd, STDOUT_FILENO);
+	ft_xclose(fd);
 }
 
 bool	open_files_in(t_cmd *cmd)
@@ -90,10 +90,10 @@ void	change_fd(t_list *files, bool is_in)
 	{
 		f = (t_file *)tmp->content;
 		if (is_in)
-			dup2(f->fd, STDIN_FILENO);
+			ft_xdup2(f->fd, STDIN_FILENO);
 		else
-			dup2(f->fd, STDOUT_FILENO);
-		close(f->fd);
+			ft_xdup2(f->fd, STDOUT_FILENO);
+		ft_xclose(f->fd);
 		tmp = tmp->next;
 		i++;
 	}

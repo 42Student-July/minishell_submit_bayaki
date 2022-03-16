@@ -6,7 +6,7 @@
 /*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 15:26:02 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/16 15:29:05 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ size_t	process_in_quote_heredoc(t_lexer *lexer, size_t pos_tail, char quote)
 	{
 		if (lexer->input[pos_tail] == '\0')
 		{
-			printf("error: not quoted heredoc delimiter\n");
+			perror("not quoted heredoc delimiter");
 			exit(EXIT_FAILURE);
 		}
 		pos_tail++;

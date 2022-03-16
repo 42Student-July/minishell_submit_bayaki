@@ -6,7 +6,7 @@
 /*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 15:04:56 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 15:06:23 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/16 15:38:56 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ bool	command_process(t_exec_attr *ea)
 	return (false);
 }
 
-// mem_mgt_check();
 void	start_repl(void)
 {
 	t_exec_attr		*ea;
@@ -79,6 +78,7 @@ void	start_repl(void)
 		if (command_process(ea))
 			continue ;
 		ft_lstclear(&ea->cmd_lst, delete_pipe);
+ 		// mem_mgt_check();
 	}
 	free_exec_attr(ea);
 	clear_history();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   self_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 09:37:34 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 15:41:04 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,19 +81,19 @@ char *remove_relative(char *path, t_exec_attr *ea)
 	new_split_len = i - blank_count - dot_count - (ddot_count * 2) + 1;
 	if (new_split_len < 0)
 	{
-		new_str = ft_strdup("/");
+		new_str = ft_xstrdup("/");
 		free_char_dptr(split);
 		return (new_str);
 	}
 	// ループの順番によっては..の分の要素数を確保しないといけない場合があるのでsizeを大きくする
 	new_split_len = i - blank_count - dot_count + 1;
-	new_split = (char **)malloc(sizeof(char *) * new_split_len);
+	new_split = (char **)ft_xmalloc(sizeof(char *) * new_split_len);
 	if (new_split == NULL)
 		abort_minishell(MALLOC_ERROR, ea);
 	i = 0;
 	size_t j = 0;
 	while (split[i] != NULL)
-	{	
+	{
 		// もしパスに..が存在する場合、前のパスを削除する
 		// ただし絶対パスの一番目を除く
 		if (is_same_str("", split[i]))
@@ -120,7 +120,7 @@ char *remove_relative(char *path, t_exec_attr *ea)
 			i++;
 			continue ;
 		}
-		new_split[j] = ft_strjoin("/", split[i]);
+		new_split[j] = ft_xstrjoin("/", split[i]);
 		new_str_len += ft_strlen(new_split[j]);
 		j++;
 		i++;
@@ -204,7 +204,7 @@ int	x_chdir(char *arg, t_exec_attr *ea)
 			abort_minishell(MALLOC_ERROR, ea);
 	}
 	else
-		path = ft_strdup(arg);
+		path = ft_xstrdup(arg);
 	if (has_diff(path, ea))
 	{
 		tmp = create_new_pwd(ea->current_pwd, path);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/15 20:22:51 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 15:37:41 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,16 @@ void	init_oldpwd(t_exec_attr *ea)
 
 void	store_stdfd(t_exec_attr *ea)
 {
-	ea->stdfd[0] = dup(STDIN_FILENO);
-	ea->stdfd[1] = dup(STDOUT_FILENO);
-	ea->stdfd[2] = dup(STDERR_FILENO);
+	ea->stdfd[0] = ft_xdup(STDIN_FILENO);
+	ea->stdfd[1] = ft_xdup(STDOUT_FILENO);
+	ea->stdfd[2] = ft_xdup(STDERR_FILENO);
 }
 
 void	init_new(t_exec_attr **ea)
 {
 	extern char	**environ;
 
-	*ea = (t_exec_attr *)malloc(sizeof(t_exec_attr));
-	if (*ea == NULL)
-		abort_minishell(MALLOC_ERROR, *ea);
+	*ea = (t_exec_attr *)ft_xmalloc(sizeof(t_exec_attr));
 	store_allenv_in_envlst(*ea, environ);
 	store_allenv_in_export(*ea, environ);
 	store_stdfd(*ea);

@@ -70,6 +70,9 @@ SRCS :=	ft_strlen.c \
 		ft_xsubstr.c\
 		ft_xsplit.c\
 		ft_xlstnew.c\
+		ft_xdup.c\
+		ft_xdup2.c\
+		ft_xclose.c\
 
 B_SRCS=	ft_lstnew.c \
 	 ft_lstadd_front.c \
