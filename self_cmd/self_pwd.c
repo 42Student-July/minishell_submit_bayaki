@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 09:38:16 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 10:51:14 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ char	*x_getcwd(t_exec_attr *ea)
 	if (lst == NULL)
 		return (NULL);
 	pathname = ft_kvsget_value(lst->content);
-	// PWDが空文字のときはea->current_pwdを使用する
 	if (ft_strlen(pathname) == 0)
 		return (NULL);
 	return (pathname);

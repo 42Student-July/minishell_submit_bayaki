@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 09:37:41 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 16:54:15 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,22 @@ int			exec_self_pwd(t_cmd *cmd, t_exec_attr *ea);
 
 // self_cd.c
 int			exec_self_cd(t_cmd *cmd, t_exec_attr *ea);
-char		*create_new_pwd(char *pwd, char *path);
+char		*concat_new_pwd(char *pwd, char *path);
 bool		is_symlink(char *path, t_exec_attr *ea);
 bool		is_end_of_slash(char *path);
-char		*create_str_removed_end(char *path);
 
 // self_cd_utils.c
 void		update_all_environ(char *new_pwd, t_exec_attr *ea);
+
+// self_cd_utils_2.c
+bool		has_diff(char *path, t_exec_attr *ea);
+char		*remove_relative(char *path);
+
+// self_cd_utils_3.c
+char		*create_str_removed_end(char *path);
+size_t		count_rm_rel_path(char **split);
+bool		is_relative_exist(char *split_path);
+void		process_ddot(char *path, char **sp_rm_rel, size_t *j);
 
 // self_echo.c
 int			exec_self_echo(t_cmd *cmd, t_exec_attr *ea);
@@ -71,11 +80,13 @@ bool		addlst_sort_by_ascii(t_list **export_lst, char **arg);
 void		print_export_kvs(void *content);
 void		sort_listkey_by_ascii(t_list *export_lst);
 void		print_all_export_lst(t_exec_attr *ea);
+void		export_print_err(char *arg, bool *exit_stat);
+bool		is_sharp(char *arg);
 
 // self_cmd_utils.c
 bool		is_invalid_name(char *name);
 void		print_error_msg_with_var(char *cmd_name, char *var);
-void		print_error(char *cmd, char *input);
+int			print_error(char *cmd, char *input);
 bool		has_caps(char *path);
 
 #endif

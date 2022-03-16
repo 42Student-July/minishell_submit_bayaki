@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 09:37:50 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 11:17:06 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,39 +40,45 @@ static char	*get_arg1(t_cmd *cmd)
 	if (arg1_lst == NULL)
 		return (cmd->args->content);
 	arg1 = arg1_lst->content;
-	return (ft_strtrim(arg1, " "));
+	return (ft_xstrtrim(arg1, " "));
+}
+
+bool	check_argc(t_cmd *cmd)
+{
+	int	argc;
+
+	argc = ft_lstsize(cmd->args);
+	if (argc == 1)
+		exit(g_exit_status);
+	if (argc > 2)
+	{
+		ft_put_cmd_error("exit", "too many arguments");
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
 }
 
 int	exec_self_exit(t_cmd *cmd, bool is_pipe)
 {
 	unsigned int	exit_status;
-	int				argc;
 	char			*arg1;
 	long			arg1_num;
 
-	if (!is_pipe) // pipeのときは出力しないらしい
+	if (!is_pipe)
 		ft_putendl_fd("exit", STDERR_FILENO);
-	argc = ft_lstsize(cmd->args);
-	if (argc == 1)
-		exit(g_exit_status);
+	if (check_argc(cmd))
+		return (EXIT_FAILURE);
 	arg1 = get_arg1(cmd);
-	if (arg1 == NULL)
-		exit(EXIT_FAILURE);
 	if (!is_num(arg1) || !ft_atol(arg1, &arg1_num))
 	{
 		ft_put_arg_error("exit", arg1, "numeric argument required");
 		exit(255);
 	}
 	free(arg1);
-	if (argc > 2)
-	{
-		ft_put_cmd_error("exit", "too many arguments");
-		return (EXIT_FAILURE);
-	}
 	exit_status = arg1_num;
 	if (exit_status > 255)
 		exit(exit_status % 256);
 	else
 		exit(exit_status);
-	return (exit_status); // 無いとエラーになるので飾り
+	return (exit_status);
 }

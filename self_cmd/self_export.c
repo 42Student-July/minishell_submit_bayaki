@@ -6,21 +6,11 @@
 /*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 15:41:53 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/16 11:14:41 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "self_cmd.h"
-
-bool	is_sharp(char *arg)
-{
-	if (arg == NULL)
-		return (false);
-	// exportの第一引数が#から始まっている限り、なにが後ろにきたとしても、export(引数なし)と同じような実装になる。
-	if (*arg == '#')
-		return (true);
-	return (false);
-}
 
 int	exec_self_export(t_cmd *cmd, t_exec_attr *ea)
 {
@@ -38,10 +28,8 @@ int	exec_self_export(t_cmd *cmd, t_exec_attr *ea)
 	return (1);
 }
 
-// 新しく追加
 bool	addlst_sort_by_ascii(t_list **export_lst, char **arg)
 {
-	// まずadd_backでポインタの位置を確定した後、contentを入れ替える
 	bool	flag;
 
 	flag = ft_lstadd_back(export_lst, \
@@ -55,7 +43,6 @@ bool	addlst_sort_by_ascii(t_list **export_lst, char **arg)
 
 int	check_export_arg(char **arg)
 {
-	// ちょっと全部は把握しきれていないが、KEYに_以外の記号がはいったらout
 	if (is_invalid_name(arg[KEY]))
 		return (INVALID_IDENTIFER);
 	if (arg[VALUE] == NULL)
@@ -63,10 +50,34 @@ int	check_export_arg(char **arg)
 	return (10);
 }
 
-void	export_with_args(t_cmd *cmd, t_exec_attr *ea, bool *exit_stat)
+void	store_arg(char *arg, t_exec_attr *ea, bool *exit_stat)
 {
 	char		**kv;
 	int			ret;
+
+	kv = ft_separate(arg, '=');
+	ret = check_export_arg(kv);
+	if (ret == INVALID_IDENTIFER)
+	{
+		*exit_stat = false;
+		print_error_msg_with_var(EXPORT, kv[KEY]);
+	}
+	else
+	{
+		if (ret == NO_VALUE)
+			kv[VALUE] = ft_xstrdup("");
+		if (!store_arg_in_env(ea, kv[KEY], kv[VALUE]))
+			abort_minishell_with(MALLOC_ERROR, ea, kv);
+		if (!store_arg_in_export(ea, kv[KEY], kv[VALUE]))
+			abort_minishell_with(MALLOC_ERROR, ea, kv);
+	}
+	free(kv[0]);
+	free(kv[1]);
+	free(kv);
+}
+
+void	export_with_args(t_cmd *cmd, t_exec_attr *ea, bool *exit_stat)
+{
 	char		*arg;
 	t_list		*lst;
 
@@ -74,57 +85,21 @@ void	export_with_args(t_cmd *cmd, t_exec_attr *ea, bool *exit_stat)
 	while (lst != NULL)
 	{
 		arg = (char *)(lst->content);
-		// 引数が"a="の場合と"a"の判別がつけられない実装になっている
-		// そのため、strchrでまず引数に=があるか判定してから、各実装に入る
 		if (ft_strchr(arg, '=') == NULL)
 		{
 			if (is_invalid_name(arg))
 			{
-				print_error_msg_with_var(EXPORT, arg);
+				export_print_err(arg, exit_stat);
 				lst = lst->next;
-				*exit_stat = false;
 				continue ;
 			}
 			store_arg_in_export(ea, arg, NULL);
 			store_arg_in_env(ea, arg, NULL);
 		}
-		// 先頭ポインタが"="だったとき、keyが存在しないのでerrorとする
 		else if (ft_strchr(arg, '=') == arg)
-		{
-			*exit_stat = false;
-			print_error_msg_with_var(EXPORT, arg);
-			lst = lst->next;
-			continue ;
-		}
+			export_print_err(arg, exit_stat);
 		else
-		{
-			kv = ft_separate(arg, '=');
-			if (kv == NULL)
-				abort_minishell(MALLOC_ERROR, ea);
-			ret = check_export_arg(kv);
-			if (ret == INVALID_IDENTIFER)
-			{
-				*exit_stat = false;
-				print_error_msg_with_var(EXPORT, kv[KEY]);
-			}
-			else
-			{
-				if (ret == NO_VALUE)
-				{
-					// valueがnullだけど=が存在する場合、valueには\0を入れる。
-					kv[VALUE] = ft_xstrdup("");
-					if (kv[VALUE] == NULL)
-						abort_minishell_with(MALLOC_ERROR, ea, kv);
-				}
-				if (!store_arg_in_env(ea, kv[KEY], kv[VALUE]))
-					abort_minishell_with(MALLOC_ERROR, ea, kv);
-				if (!store_arg_in_export(ea, kv[KEY], kv[VALUE]))
-					abort_minishell_with(MALLOC_ERROR, ea, kv);
-			}
-			free(kv[0]);
-			free(kv[1]);
-			free(kv);
-		}
+			store_arg(arg, ea, exit_stat);
 		lst = lst->next;
 	}
 }
