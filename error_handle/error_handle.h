@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handle.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 09:30:15 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 14:47:26 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # define INVALID_IDENTIFER_MSG "not an identifier\n"
 # define OPENDIR_ERROR "opendir error\n"
 # define OPEN_ERROR "open error\n"
-# define DUP2_ERROR "dup2 error\n"
 # define GETCWD_ERROR "getcwd error"
 
 # define INVALID_IDENTIFER 0
