@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/15 16:31:36 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 20:48:16 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ char	*create_cmd_from_path(\
 	return (NULL);
 }
 
-// カレントディレクトリを指す":"を"."に置換する処理
 char	*replace_colon_to_currentdir(char *env_path)
 {
 	char	*ret;
@@ -63,7 +62,6 @@ char	*replace_colon_to_currentdir(char *env_path)
 	return (ret);
 }
 
-// TODO: 引数を一つにする
 char	*find_path(char *cmd_name, t_exec_attr *ea, size_t cmd_i)
 {
 	char			*env_path;

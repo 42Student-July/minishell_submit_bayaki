@@ -6,13 +6,12 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/15 20:24:16 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 20:48:50 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/command.h"
 
-// 引数のコマンド名と実行時のコマンドが一致していたらtrue
 bool	is_(char *command, char *cmd)
 {
 	if (is_same_str(cmd, command))
