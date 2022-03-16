@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 08:59:20 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 09:06:56 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	free_char_dptr(char **dptr)
 			free(dptr[i]);
 			i++;
 		}
-		free(dptr[i]); // 番兵をfreeする
+		free(dptr[i]);
 		free(dptr);
 	}
 }
@@ -73,16 +73,4 @@ void	abort_minishell_with(char *msg, t_exec_attr *ea, char **split)
 	if (ea != NULL)
 		free_exec_attr(ea);
 	exit(EXIT_FAILURE);
-}
-
-void	free_all_kvs(t_kvs *kvs)
-{
-	if (kvs != NULL)
-	{
-		if (kvs->key != NULL)
-			free(kvs->key);
-		if (kvs->value != NULL)
-			free(kvs->value);
-		free(kvs);
-	}
 }
