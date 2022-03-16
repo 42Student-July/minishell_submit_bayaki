@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 10:22:27 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 10:23:16 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 17:19:19 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,3 @@ static int	contains_charset(const char c, const char *charset)
 	}
 	return (0);
 }
-

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/16 17:16:38 by mhirabay          #+#    #+#             */
+/*   Updated: 2022/03/16 17:16:56 by mhirabay         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lexer.h"
 #include "libft.h"
 #include "repl.h"
@@ -6,13 +18,8 @@
 
 int	g_exit_status = 0;
 
-int main()
+int	main(void)
 {
 	set_signal_handler_during_command();
 	start_repl();
 }
-
-// __attribute__((destructor))
-// static void destructor() {
-//     system("leaks -q minishell");
-// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_repl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 15:04:56 by akito             #+#    #+#             */
-/*   Updated: 2022/03/16 15:38:56 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/16 17:17:46 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	print_exit_status(void)
 		printf(F_RED "%d " F_RESET, g_exit_status);
 }
 
-// print_exit_status();
 char	*do_readline(void)
 {
 	char	*line;
@@ -78,7 +77,6 @@ void	start_repl(void)
 		if (command_process(ea))
 			continue ;
 		ft_lstclear(&ea->cmd_lst, delete_pipe);
- 		// mem_mgt_check();
 	}
 	free_exec_attr(ea);
 	clear_history();

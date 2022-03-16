@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:59:34 by akito             #+#    #+#             */
-/*   Updated: 2022/03/16 16:09:13 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/16 17:19:07 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void				*ft_xcalloc(size_t nmemb, size_t size);
 char				*ft_xsubstr(char const *s, unsigned int start, size_t len);
 char				**ft_xsplit(char const *str, char c);
 t_list				*ft_xlstnew(void *content);
-char    *ft_xstrtrim(char const *s1, char const *set);
+char				*ft_xstrtrim(char const *s1, char const *set);
 int					ft_xdup(int fd);
 void				ft_xdup2(int fd1, int fd2);
 void				ft_xclose(int fd);
