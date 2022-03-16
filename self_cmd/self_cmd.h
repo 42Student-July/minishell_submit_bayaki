@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 09:37:41 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 11:14:33 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ bool		addlst_sort_by_ascii(t_list **export_lst, char **arg);
 void		print_export_kvs(void *content);
 void		sort_listkey_by_ascii(t_list *export_lst);
 void		print_all_export_lst(t_exec_attr *ea);
+void		export_print_err(char *arg, bool *exit_stat);
+bool		is_sharp(char *arg);
 
 // self_cmd_utils.c
 bool		is_invalid_name(char *name);

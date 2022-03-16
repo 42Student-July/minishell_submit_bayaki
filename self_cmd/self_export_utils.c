@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 09:37:52 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/16 11:14:15 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,19 @@ void	print_export_kvs(void *content)
 		printf("declare -x %s\n", kvs->key);
 	else
 		printf("declare -x %s=%s\n", kvs->key, kvs->value);
+}
+
+void	export_print_err(char *arg, bool *exit_stat)
+{
+	print_error_msg_with_var(EXPORT, arg);
+	*exit_stat = false;
+}
+
+bool	is_sharp(char *arg)
+{
+	if (arg == NULL)
+		return (false);
+	if (*arg == '#')
+		return (true);
+	return (false);
 }
