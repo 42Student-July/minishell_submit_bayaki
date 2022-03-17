@@ -6,7 +6,7 @@
 /*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/16 15:33:27 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/17 14:50:59 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,14 @@ bool	should_return(t_lexer_product *lexer_product)
 {
 	if (((t_token *)lexer_product->token_list->content)->type == TOKEN_EOF)
 	{
-		ft_lstclear(&lexer_product->token_list, delete_token);
-		free(lexer_product);
+		delete_lexer_product(lexer_product);
 		return (true);
 	}
 	if (!is_valid_tokens(lexer_product->token_list))
 	{
 		if (write(STDERR, "syntax error\n", 13))
 			exit(EXIT_FAILURE);
-		ft_lstclear(&lexer_product->token_list, delete_token);
-		free(lexer_product);
+		delete_lexer_product(lexer_product);
 		return (true);
 	}
 	return (false);
@@ -67,8 +65,7 @@ bool	heredoc_process(t_lexer *lexer, t_lexer_product *lexer_product,
 		flag = read_heredoc(lexer, env);
 	if (!flag)
 	{
-		ft_lstclear(&lexer_product->token_list, delete_token);
-		free(lexer_product);
+		delete_lexer_product(lexer_product);
 		return (true);
 	}
 	return (false);
@@ -82,7 +79,10 @@ t_lexer_product	*analyze_lex(const char *line, t_list *env)
 
 	make_token_list(line, &token, &lexer, &lexer_product);
 	if (should_return(lexer_product))
+	{
+		delete_lexer_without_heredocs(lexer);
 		return (NULL);
+	}
 	if (heredoc_process(lexer, lexer_product, env))
 		return (NULL);
 	if (ft_strlen(lexer->input) > 0)
