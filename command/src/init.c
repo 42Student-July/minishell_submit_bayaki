@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 15:37:41 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/17 17:13:32 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	init_new(t_exec_attr **ea)
 {
 	extern char	**environ;
 
-	*ea = (t_exec_attr *)ft_xmalloc(sizeof(t_exec_attr));
+	*ea = (t_exec_attr *)ft_xcalloc(sizeof(t_exec_attr), 1);
 	store_allenv_in_envlst(*ea, environ);
 	store_allenv_in_export(*ea, environ);
 	store_stdfd(*ea);

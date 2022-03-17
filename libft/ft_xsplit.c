@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_xsplit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akito     <akito@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:59:34 by akito             #+#    #+#             */
-/*   Updated: 2022/03/16 15:59:34 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/17 17:09:17 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	**ft_xsplit(char const *str, char c)
 	if (str == NULL)
 		return (NULL);
 	col = count_cols(str, c);
-	res = (char **)ft_xmalloc(sizeof(char *) * (col + 1));
+	res = (char **)ft_xcalloc(sizeof(char *), (col + 1));
 	if (res == NULL)
 		return (NULL);
 	res = set_words(res, str, col, c);

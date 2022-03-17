@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 13:52:43 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 20:52:46 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/17 17:16:41 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	**create_rm_rel_split( \
 
 	i = 0;
 	j = 0;
-	split_path_rm_rel = (char **)ft_xmalloc(sizeof(char *) * spath_len);
+	split_path_rm_rel = (char **)ft_xcalloc(sizeof(char *), spath_len);
 	while (split[i] != NULL)
 	{	
 		if (is_relative_exist(split[i]))

@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/15 17:34:27 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/17 17:14:29 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	**convert_envlst_to_array(t_exec_attr *ea)
 	i = 0;
 	tmp = ea->env_lst;
 	env_lst_size = ft_lstsize(tmp);
-	array = (char **)ft_xmalloc(sizeof(char *) * (env_lst_size + NULL_CHAR));
+	array = (char **)ft_xcalloc(sizeof(char *), (env_lst_size + NULL_CHAR));
 	while (i < env_lst_size)
 	{
 		array[i] = create_env_oneline(tmp, i, env_lst_size);

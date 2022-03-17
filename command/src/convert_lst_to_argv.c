@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/15 15:27:32 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/17 17:14:24 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**convert_lst_to_argv(t_list *args)
 	t_list	*current_arg;
 
 	cmdc = ft_lstsize(args);
-	cmdv = (char **)ft_xmalloc(sizeof(char *) * (cmdc + NULL_CHAR));
+	cmdv = (char **)ft_xcalloc(sizeof(char *), (cmdc + NULL_CHAR));
 	i = 0;
 	current_arg = args;
 	while (current_arg != NULL)

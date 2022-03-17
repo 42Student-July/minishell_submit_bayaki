@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_kvsnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akito     <akito@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:59:34 by akito             #+#    #+#             */
-/*   Updated: 2022/03/16 15:59:34 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/17 17:16:29 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*ft_kvsnew(char *key, char *value)
 {
 	t_kvs	*kvs;
 
-	kvs = (t_kvs *)ft_xmalloc(sizeof(t_kvs));
+	kvs = (t_kvs *)ft_xcalloc(sizeof(t_kvs), 1);
 	if (kvs == NULL)
 		return (NULL);
 	kvs->key = ft_xstrdup(key);

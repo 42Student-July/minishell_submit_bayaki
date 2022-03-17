@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_xsubstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akito     <akito@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:59:34 by akito             #+#    #+#             */
-/*   Updated: 2022/03/16 15:59:34 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/17 17:09:39 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_xsubstr(char const *s, unsigned int start, size_t len)
 	if (ft_strlen(s) <= (size_t)start)
 		return (ft_xstrdup(""));
 	len = ft_min(len, ft_strlen(s) - (size_t)start);
-	res = (char *)ft_xmalloc(sizeof(char) * (len + 1));
+	res = (char *)ft_xcalloc(sizeof(char), (len + 1));
 	if (res == NULL)
 		return (NULL);
 	ft_strlcpy(res, s + start, len + 1);

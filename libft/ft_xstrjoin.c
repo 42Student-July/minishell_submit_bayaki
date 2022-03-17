@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_xstrjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akito     <akito@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:59:34 by akito             #+#    #+#             */
-/*   Updated: 2022/03/16 15:59:34 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/17 17:08:15 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*ft_xstrjoin(char const *s1, char const *s2)
 		errno = ENOMEM;
 		return (NULL);
 	}
-	res = (char *)ft_xmalloc(sizeof(char) * (s1_len + s2_len + 1));
+	res = (char *)ft_xcalloc(sizeof(char), (s1_len + s2_len + 1));
 	ft_strlcpy(res, s1, s1_len + 1);
 	ft_strlcpy(res + s1_len, s2, s2_len + 1);
 	return (res);

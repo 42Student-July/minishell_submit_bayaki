@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/15 15:50:58 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/17 17:14:18 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool	*malloc_has_not_permission(size_t size)
 	size_t	i;
 
 	i = 0;
-	ret = (bool *)ft_xmalloc(sizeof(bool) * size);
+	ret = (bool *)ft_xcalloc(sizeof(bool), size);
 	while (i < size)
 	{
 		ret[0] = false;

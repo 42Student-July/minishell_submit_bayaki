@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:59:34 by akito             #+#    #+#             */
-/*   Updated: 2022/03/16 17:18:44 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/17 17:15:51 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	**ft_separate(char *str, char separator)
 	sep_ptr = ft_strchr(str, separator);
 	if (sep_ptr == NULL)
 		return (NULL);
-	array = (char **)ft_xmalloc(sizeof(char *) * (2 + 1));
+	array = (char **)ft_xcalloc(sizeof(char *), (2 + 1));
 	if (*(sep_ptr + 1) == '\0')
 	{
 		array[0] = ft_strcdup(str, separator);

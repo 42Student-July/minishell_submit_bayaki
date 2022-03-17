@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 22:18:03 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 21:13:30 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/17 17:14:41 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	malloc_pipe_fd(t_pipe_attr *pa)
 {
 	int	i;
 
-	pa->pipe_fd = (int **)ft_xmalloc(sizeof(int *) * pa->pipe_count);
+	pa->pipe_fd = (int **)ft_xcalloc(sizeof(int *), pa->pipe_count);
 	i = 0;
 	while (i < pa->pipe_count)
 	{
-		pa->pipe_fd[i] = (int *)ft_xmalloc(sizeof(int) * 2);
+		pa->pipe_fd[i] = (int *)ft_xcalloc(sizeof(int), 2);
 		i++;
 	}
 	return ;
@@ -28,7 +28,7 @@ void	malloc_pipe_fd(t_pipe_attr *pa)
 
 void	malloc_cpid_array(t_pipe_attr *pa)
 {
-	pa->cpid_array = (int *)ft_xmalloc(sizeof(int *) * (pa->pipe_count + 1));
+	pa->cpid_array = (int *)ft_xcalloc(sizeof(int *), (pa->pipe_count + 1));
 }
 
 void	make_pipe(t_pipe_attr *pa)
