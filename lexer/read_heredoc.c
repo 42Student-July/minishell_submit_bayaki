@@ -6,7 +6,7 @@
 /*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/15 15:16:55 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/17 17:37:46 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,13 @@ bool
 	else
 	{
 		if (!divfunc3(pid))
-			return (false);
+		{
+			{
+				delete_lexer(lexer);
+				free(delimiter);
+				return (false);
+			}
+		}
 	}
 	return (true);
 }
