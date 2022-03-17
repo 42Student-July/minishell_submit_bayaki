@@ -6,7 +6,7 @@
 /*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/17 16:05:01 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/17 16:12:43 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ char	*replace_colon_to_currentdir(char *env_path)
 		free(ret);
 		ret = tmp;
 	}
+	free(env_path);
 	return (ret);
 }
 
