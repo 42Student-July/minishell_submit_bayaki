@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 20:48:16 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/17 16:05:01 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*find_path(char *cmd_name, t_exec_attr *ea, size_t cmd_i)
 	lst = get_lst_by_key(ea->env_lst, "PATH");
 	if (lst == NULL)
 		return (NULL);
-	env_path = ft_kvsget_value(lst->content);
+	env_path = ft_xstrdup(ft_kvsget_value(lst->content));
 	if (env_path == NULL)
 		return (NULL);
 	env_path = replace_colon_to_currentdir(env_path);
