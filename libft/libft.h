@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:59:34 by akito             #+#    #+#             */
-/*   Updated: 2022/03/16 21:13:48 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/18 16:10:42 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,6 @@ int					ft_xdup(int fd);
 void				ft_xdup2(int fd1, int fd2);
 void				ft_xclose(int fd);
 void				ft_xpipe(int pipefd[2]);
+pid_t				ft_xfork(void);
 
 #endif
