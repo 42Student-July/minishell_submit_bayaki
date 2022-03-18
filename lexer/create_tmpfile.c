@@ -6,7 +6,7 @@
 /*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/16 15:32:37 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/18 16:42:07 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ void	create_tmpfile(char *tmpfile)
 	int	fd;
 
 	if (access("/tmp", F_OK) != 0)
-		mkdir("/tmp", 0777);
+	{
+		perror("you should create tmp folder");
+		exit(EXIT_FAILURE);
+	}
 	fd = open(tmpfile, O_WRONLY | O_CREAT | O_TRUNC, 0600);
 	if (fd == -1)
 		exit(EXIT_FAILURE);
