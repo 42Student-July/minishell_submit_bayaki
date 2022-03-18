@@ -6,11 +6,13 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/15 20:23:05 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/18 16:04:16 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command.h"
+#include <signal.h>
+#include "sigaction.h"
 
 void	proceed_execve(t_cmd *c, char *cmd_path, t_exec_attr *ea)
 {
@@ -38,45 +40,55 @@ void	proceed_wait(pid_t cpid)
 	while (true)
 	{
 		wait_ret = waitpid(cpid, &status, 0);
+		if (WIFSIGNALED(status))
+		{
+			printf("\n");
+			g_exit_status = WEXITSTATUS(status);
+			break ;
+		}
 		if (wait_ret > 0)
 			break ;
-		if (WIFSIGNALED(status))
-			continue ;
 		exit(EXIT_FAILURE);
 	}
 	if (!WIFSIGNALED(status))
 		g_exit_status = WEXITSTATUS(status);
 }
 
-void	execute_ext_cmd(t_cmd *c, t_exec_attr *ea)
+void	execute_ext_cmd(t_cmd *c, t_exec_attr *ea, char *cmd_path)
 {
 	pid_t	cpid;
-	char	*cmd_path;
+	int		status;
+	pid_t	wait_ret;
 
 	cmd_path = create_cmd_path(c, ea);
 	if (cmd_path == NULL)
 		return ;
-	cpid = fork();
-	if (cpid == -1)
-	{
-		perror("fork");
-		exit(EXIT_FAILURE);
-	}
-	else if (cpid == 0)
-	{
+	cpid = ft_xfork();
+	if (cpid == 0)
 		proceed_execve(c, cmd_path, ea);
-	}
 	else
 	{
 		free(cmd_path);
-		proceed_wait(cpid);
+		while (true)
+		{
+			wait_ret = waitpid(cpid, &status, 0);
+			if (wait_ret > 0)
+				break ;
+			if (WIFSIGNALED(status))
+				continue ;
+			exit(EXIT_FAILURE);
+		}
+		if (!WIFSIGNALED(status))
+			g_exit_status = WEXITSTATUS(status);
 	}
 }
 
 void	no_pipe_process(t_exec_attr *ea)
 {
 	t_cmd	*c;
+	char	*cmd_path;
 
+	cmd_path = NULL;
 	c = get_cmd(ea);
 	ea->has_not_permission = malloc_has_not_permission(sizeof(bool) * 1);
 	if (has_redirect_file(c))
@@ -93,6 +105,6 @@ void	no_pipe_process(t_exec_attr *ea)
 			reset_stdfd(ea);
 	}
 	else
-		execute_ext_cmd(c, ea);
+		execute_ext_cmd(c, ea, cmd_path);
 	free(ea->has_not_permission);
 }

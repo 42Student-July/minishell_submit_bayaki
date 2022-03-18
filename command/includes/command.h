@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/15 23:10:40 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/18 16:03:54 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char		**convert_lst_to_argv(t_list *args);
 
 // no_pipe_process.c
 void		no_pipe_process(t_exec_attr *ea);
-void		execute_ext_cmd(t_cmd *c, t_exec_attr *ea);
+void		execute_ext_cmd(t_cmd *c, t_exec_attr *ea, char *cmd_path);
 bool		is_path(char *cmd);
 
 // pipe_process.c

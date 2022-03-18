@@ -6,7 +6,7 @@
 #    By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/02 13:21:26 by mhirabay          #+#    #+#              #
-#    Updated: 2022/03/15 22:19:36 by mhirabay         ###   ########.fr        #
+#    Updated: 2022/03/15 22:19:36by amhirabay        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ HEADERS	:=	. \
 			../environ/ \
 			../error_handle/ \
 			../self_cmd/ \
+			../signal/includes \
 
 INCLUDES	=	$(addprefix -I, $(HEADERS))
 

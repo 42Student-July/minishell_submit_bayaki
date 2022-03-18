@@ -75,6 +75,7 @@ SRCS :=	ft_strlen.c \
 		ft_xdup2.c\
 		ft_xclose.c\
 		ft_xpipe.c\
+		ft_xfork.c\
 
 B_SRCS=	ft_lstnew.c \
 	 ft_lstadd_front.c \
