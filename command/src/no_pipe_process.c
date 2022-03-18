@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   no_pipe_process.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/15 20:23:05 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/18 14:34:16 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command.h"
+#include <signal.h>
 
 void	proceed_execve(t_cmd *c, char *cmd_path, t_exec_attr *ea)
 {
@@ -64,6 +65,8 @@ void	execute_ext_cmd(t_cmd *c, t_exec_attr *ea)
 	}
 	else if (cpid == 0)
 	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		proceed_execve(c, cmd_path, ea);
 	}
 	else
