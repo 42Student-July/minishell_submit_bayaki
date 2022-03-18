@@ -6,7 +6,7 @@
 /*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 17:15:04 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/16 17:16:01 by mhirabay         ###   ########.fr       */
+/*   Updated: 2022/03/18 13:45:22 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ typedef enum e_stdio {
 	STDERR = 2
 }						t_stdio;
 
-extern int	g_exit_status;
+extern volatile int	g_exit_status;
 
 #endif
