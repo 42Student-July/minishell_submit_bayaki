@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/18 16:06:32 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/18 16:11:08 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	replace_quoted_str(char **buffer, t_list *env_list)
 }
 
 void
-	read_heredoc_in_child_process(t_lexer *lexer, t_list *env_list, bool has_quote, char *delimiter)
+	read_heredoc_in_child_process( \
+		t_lexer *lexer, t_list *env_list, bool has_quote, char *delimiter)
 {
 	char	*line;
 	char	*buffer;
@@ -86,7 +87,8 @@ bool	is_heredoc_succeeded(pid_t	pid)
 }
 
 bool
-	read_heredoc_process(t_lexer *lexer, t_list *env_list, bool has_quote, char *delimiter)
+	read_heredoc_process( \
+		t_lexer *lexer, t_list *env_list, bool has_quote, char *delimiter)
 {
 	pid_t	pid;
 
