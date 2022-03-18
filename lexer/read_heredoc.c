@@ -6,7 +6,7 @@
 /*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:45:50 by akito             #+#    #+#             */
-/*   Updated: 2022/03/18 15:54:24 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/18 16:06:32 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ bool	is_heredoc_succeeded(pid_t	pid)
 }
 
 bool
-	heredoc_process(t_lexer *lexer, t_list *env_list, bool has_quote, char *delimiter)
+	read_heredoc_process(t_lexer *lexer, t_list *env_list, bool has_quote, char *delimiter)
 {
 	pid_t	pid;
 
@@ -131,7 +131,7 @@ bool	read_heredoc(t_lexer *lexer, t_list *env_list)
 		delimiter = tmp;
 	}
 	register_heredocs(lexer, delimiter);
-	if (!heredoc_process(lexer, env_list, has_quote, delimiter))
+	if (!read_heredoc_process(lexer, env_list, has_quote, delimiter))
 		return (false);
 	free(delimiter);
 	return (true);
