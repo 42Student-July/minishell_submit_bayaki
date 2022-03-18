@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_repl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: mhirabay <mhirabay@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 15:04:56 by akito             #+#    #+#             */
-/*   Updated: 2022/03/18 14:57:21 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/18 17:44:14 by mhirabay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,4 @@ void	start_repl(void)
 		ft_lstclear(&ea->cmd_lst, delete_pipe);
 	}
 	free_exec_attr(ea);
-	clear_history();
 }
