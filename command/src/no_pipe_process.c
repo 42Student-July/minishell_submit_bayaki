@@ -6,12 +6,13 @@
 /*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 14:50:54 by mhirabay          #+#    #+#             */
-/*   Updated: 2022/03/18 14:34:16 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/18 14:57:30 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command.h"
 #include <signal.h>
+#include "sigaction.h"
 
 void	proceed_execve(t_cmd *c, char *cmd_path, t_exec_attr *ea)
 {
@@ -39,10 +40,14 @@ void	proceed_wait(pid_t cpid)
 	while (true)
 	{
 		wait_ret = waitpid(cpid, &status, 0);
+		if (WIFSIGNALED(status))
+		{
+			printf("\n");
+			g_exit_status = WEXITSTATUS(status);
+			break ;
+		}
 		if (wait_ret > 0)
 			break ;
-		if (WIFSIGNALED(status))
-			continue ;
 		exit(EXIT_FAILURE);
 	}
 	if (!WIFSIGNALED(status))
@@ -58,6 +63,7 @@ void	execute_ext_cmd(t_cmd *c, t_exec_attr *ea)
 	if (cmd_path == NULL)
 		return ;
 	cpid = fork();
+	set_signal_handler_during_command();
 	if (cpid == -1)
 	{
 		perror("fork");

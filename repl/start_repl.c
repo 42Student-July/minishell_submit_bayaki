@@ -6,7 +6,7 @@
 /*   By: akito <akito@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 15:04:56 by akito             #+#    #+#             */
-/*   Updated: 2022/03/18 14:41:23 by akito            ###   ########.fr       */
+/*   Updated: 2022/03/18 14:57:21 by akito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	start_repl(void)
 		ea->cmd_lst = parse_pipe(lexer_product->token_list,
 				&lexer_product->heredocs);
 		delete_lexer_product(lexer_product);
-		set_signal_handler_during_command();
 		if (command_process(ea))
 			continue ;
 		ft_lstclear(&ea->cmd_lst, delete_pipe);
